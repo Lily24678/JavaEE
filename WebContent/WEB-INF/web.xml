@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>JavaEE</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- servlet的配置 -->
+  <servlet>
+	  <servlet-name>servlet1</servlet-name><!-- 自定义 -->
+	  <servlet-class>com.lsy.code.servlet.Servlet1</servlet-class><!-- 实现类的全类名 -->
+	  <load-on-startup>1</load-on-startup><!-- 默认是在第一次访问的时候创建,此处配置Servlet在服务器启动的时候创建。正整数,值被创建的优先级就越高 -->
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>servlet1</servlet-name><!-- 两处的servlet-name需一致 -->
+  	<url-pattern>/servlet1</url-pattern><!-- 访问servlet的url，自定义。【http://localhost:8080/JavaEE/servlet1】  -->
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>servlet2</servlet-name>
+  	<servlet-class>com.lsy.code.servlet.HttpServlet1</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>servlet2</servlet-name>
+  	<url-pattern>/servlet2</url-pattern>
+  </servlet-mapping>
+  
+  <!-- listener的配置 -->
+  <listener>
+  	<listener-class>com.lsy.code.listener.ServletContextListener1</listener-class><!-- 实现类的全类名 -->
+  </listener>
+  <listener>
+  	<listener-class>com.lsy.code.listener.HttpSessionListener1</listener-class><!-- 实现类的全类名 -->
+  </listener>  
+  <listener>
+  	<listener-class>com.lsy.code.listener.ServletRequestListener1</listener-class><!-- 实现类的全类名 -->
+  </listener>   
+  <listener>
+  	<listener-class>com.lsy.code.listener.ServletContextAttributeListener1</listener-class>
+  </listener>
+  <listener>
+  	<listener-class>com.lsy.code.listener.HttpSessionAttributeListener1</listener-class>
+  </listener>
+  <listener>
+  	<listener-class>com.lsy.code.listener.ServletRequestAttributeListener1</listener-class>
+  </listener>
+</web-app>
