@@ -12,7 +12,7 @@ public class ServletRequestListener1 implements ServletRequestListener {
 	
 	@Override
 	public void requestDestroyed(ServletRequestEvent sre) {
-		System.out.println("ServletRequest域对象 创建：服务器对这次请求作出响应后.");
+		System.out.println("ServletRequest域对象 销毁：服务器对这次请求作出响应后.");
 	}
 
 

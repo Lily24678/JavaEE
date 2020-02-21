@@ -20,6 +20,9 @@ public class HttpServlet1 extends HttpServlet {
 		Bean1 bean1 = new Bean1();
 		bean1.setName("bean1");
 		session.setAttribute("bean1", bean1);
+		
+		Bean2 bean2 = (Bean2) session.getAttribute("bean2");//反序列化到内存
+		System.out.println(bean2.getName());
 	}
 	
 	@Override
@@ -27,6 +30,6 @@ public class HttpServlet1 extends HttpServlet {
 		HttpSession session = req.getSession();
 		Bean2 bean2 = new Bean2();
 		bean2.setName("bean2");
-		session.setAttribute("bean1", bean2);
+		session.setAttribute("bean2", bean2);
 	}
 }

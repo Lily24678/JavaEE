@@ -15,7 +15,13 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - 三类：监听HttpSession中的JavaBean的状态改变(绑定,解除绑定,钝化,活化):HttpSessionBindingListener,HttpSessionActivationListener
 
 使用步骤：
-- 1、实现监听器。
-- 2、将实现了配置到服务器中。web。xml【第三类不需要配置】
+- 1、实现监听器接口。
+- 2、将实现类配置到服务器中。web。xml【第三类不需要配置】
 
-# Filter
+## Filter
+使用步骤：
+- 1、实现Filter接口。
+- 2、将实现类配置到服务器中。web.xml
+
+# Demo案例
+1.filter 处理请求中文乱码
