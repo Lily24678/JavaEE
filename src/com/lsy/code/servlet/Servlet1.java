@@ -18,6 +18,7 @@ public class Servlet1 implements Servlet{
 	
 	@Override
 	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		res.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		res.getWriter().write("你的请求已由运行在WEB服务器上的 小型 Java程序Servlet处理完成");
 	}
 	

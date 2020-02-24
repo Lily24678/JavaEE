@@ -11,6 +11,16 @@
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
   
+  <!-- ServletContext配置:全局初始化参数：配置 -->
+  <context-param>
+  	<param-name>username</param-name>
+  	<param-value>root</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>password</param-name>
+  	<param-value>root</param-value>
+  </context-param>
+  
   <!-- servlet的配置 -->
   <servlet>
 	  <servlet-name>servlet1</servlet-name><!-- 自定义 -->

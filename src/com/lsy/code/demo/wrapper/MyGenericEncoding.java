@@ -13,6 +13,9 @@ public class MyGenericEncoding extends HttpServletRequestWrapper{
 		this.request=request;
 	}
 
+	/**
+	 * 装饰者模式：处理中文乱码
+	 */
 	@Override
 	public String getParameter(String name) {
 		String method = request.getMethod();

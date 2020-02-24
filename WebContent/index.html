@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5;/JavaEE/login.html">
+<title>首页</title>
+</head>
+<body>
+你好，你已经进入监控阶段，将在5秒后进入登陆页面。<span id="countdown1">5</span>
+<script type="text/javascript">
+var count=4;
+var fn1 = setInterval(function(){
+	document.getElementById("countdown1").innerHTML=count;
+	count--;
+	if(0>=count){
+		clearInterval(fn1);
+	}
+},1000)
+</script>
+</body>
+</html>
