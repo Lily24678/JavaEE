@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>文件上传</title>
+<title>文件上传与下载</title>
 <style type="text/css">
 input {
 	margin-top: 10px;
@@ -11,6 +11,9 @@ input {
 </style>
 </head>
 <body>
+	<a href="/JavaEE/file/0.jpg" download="0.jpg">超链接下载图片0.jpg</a>
+	<br>
+	<a href="/JavaEE/file?filename=0.jpg">手动设置下载0.jpg</a>
 	<form action="" method="post" enctype="multipart/form-data">
 		<label for="file">选择文件:</label>
 		<input type="file" name="file" value="" id="file"/>

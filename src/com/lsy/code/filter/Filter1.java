@@ -13,7 +13,6 @@ public class Filter1 implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println(filterConfig.getInitParameter("username"));
 		System.out.println("Filter实例 创建 ：服务器启动时创建。");
 	}
 

@@ -7,7 +7,7 @@ public class ServletRequestListener1 implements ServletRequestListener {
 
 	@Override
 	public void requestInitialized(ServletRequestEvent sre) {
-		System.out.println("ServletRequest域对象 创建：客户端向服务器发送一次请求,服务器就会创建.");
+		System.out.println("ServletRequest域对象 创建：客户端向服务器每发送一次请求,服务器就会创建.");
 	}
 	
 	@Override
