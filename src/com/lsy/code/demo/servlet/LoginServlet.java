@@ -26,5 +26,12 @@ public class LoginServlet extends HttpServlet {
 			//req.getRequestDispatcher("/file.html").forward(req, resp);//转发
 		}
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=UTF-8");//响应字符流乱码
+		String username = req.getParameter("username");
+		if(!"username".equals(username))resp.getWriter().write("用户名不正确");
+	}
 
 }
