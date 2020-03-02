@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lsy.code.demo.utils.BaseMassage;
+import com.lsy.code.demo.utils.MassageHandler;
 import com.lsy.code.demo.utils.StringUtils;
+
+import net.sf.json.JSONObject;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
@@ -31,7 +35,10 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		String username = req.getParameter("username");
-		if(!"username".equals(username))resp.getWriter().write("用户名不正确");
+		BaseMassage<?> massage = MassageHandler.createMsgFailure("用户名不正确");
+		JSONObject jsonObject = JSONObject.fromObject(massage);
+		if(!"username".equals(username))resp.getWriter().print(jsonObject.toString());
+		
 	}
 
 }

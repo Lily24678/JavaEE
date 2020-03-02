@@ -34,11 +34,14 @@ var Utils = {
 		//2. 设置状态改变的监听 回调函数.
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				if (xhr.getResponseHeader("content-type") == "application/json") {
-					var result = JSON.parse(xhr.responseText);
+				debugger;
+				try {
+					//var result = JSON.parse(xhr.responseText);
+					var result = eval('(' + xhr.responseText + ')');
 					callback(result);
-				} else {
-					callback(xhr.responseText);
+				} catch (e) {
+					var result = xhr.responseText;
+					callback(result);
 				}
 			}
 		}

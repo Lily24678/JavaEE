@@ -37,8 +37,10 @@
 					Utils.async("post", {
 						username: this.value
 					}, "/JavaEE/login", function(data) {
-						node = document.createTextNode(data);
-						checkNameTip(node);
+						if(200!=data.code){
+							node = document.createTextNode(data.msg);
+							checkNameTip(node);
+						}
 					}, true);
 				}
 
