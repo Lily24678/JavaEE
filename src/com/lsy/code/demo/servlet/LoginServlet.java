@@ -36,6 +36,7 @@ public class LoginServlet extends HttpServlet {
 		resp.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		String username = req.getParameter("username");
 		BaseMassage<?> massage = MassageHandler.createMsgFailure("用户名不正确");
+		//转换成JSON字符串
 		JSONObject jsonObject = JSONObject.fromObject(massage);
 		if(!"username".equals(username))resp.getWriter().print(jsonObject.toString());
 		

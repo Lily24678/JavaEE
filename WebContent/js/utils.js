@@ -36,8 +36,8 @@ var Utils = {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				debugger;
 				try {
-					//var result = JSON.parse(xhr.responseText);
-					var result = eval('(' + xhr.responseText + ')');
+					//var result = JSON.parse(xhr.responseText);//解析json字符串
+					var result = eval('(' + xhr.responseText + ')');//解析json字符串
 					callback(result);
 				} catch (e) {
 					var result = xhr.responseText;
