@@ -8,17 +8,17 @@ import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
-@SuppressWarnings("serial")
-public class DownFileServlet extends HttpServlet{
+import com.lsy.code.servlet.BaseServlet;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+@SuppressWarnings("serial")
+public class FileServlet extends BaseServlet{
+
+	public void downFile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String filename = req.getParameter("filename");
 		//1. 设置Content-Type头
 		resp.setHeader("Content-Type", this.getServletContext().getMimeType(filename));

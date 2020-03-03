@@ -17,13 +17,13 @@ import com.lsy.code.demo.utils.StringUtils;
 public class BaseServlet extends HttpServlet{
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String methodName = req.getParameter("method");
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String methodName = request.getParameter("method");
 		Class<? extends BaseServlet> clazz = this.getClass();
 		try {
 			Method method = clazz.getMethod(methodName,HttpServletRequest.class,HttpServletResponse.class);
-			String path = (String) method.invoke(this, req,resp);
-			if(StringUtils.isNotBlank(path))req.getRequestDispatcher(path).forward(req, resp);
+			String path = (String) method.invoke(this, request,response);
+			if(StringUtils.isNotBlank(path))request.getRequestDispatcher(path).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

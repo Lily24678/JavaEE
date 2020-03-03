@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>登录</title>
+		<title>注册</title>
 		<style type="text/css">
 			.form-sub1 {
 				margin-top: 10px;
@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="./js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=login" method="post">
+		<form action="/JavaEE/user?method=regist" method="post" id="registForm" onsubmit="return checkUser();">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -36,7 +36,7 @@
 					//异步校验
 					Utils.async("post", {
 						username: this.value
-					}, "/JavaEE/user?method=checkNameLogin", function(data) {
+					}, "/JavaEE/user?method=checkNameRegist", function(data) {
 						if(200!=data.code){
 							node = document.createTextNode(data.msg);
 							checkNameTip(node);
@@ -45,6 +45,19 @@
 				}
 
 			});
+			
+			//校验是否存在，存在则阻止表单提交
+			function checkUser() {
+				var formData = new FormData(document.getElementById("registForm"));
+				var params = convert_FormData_to_json2(formData);
+				Utils.async("post", JSON.parse(params), "/JavaEE/user?method=checkNameRegist", function(data) {
+					if(200!=data.code){
+						node = document.createTextNode(data.msg);
+						checkNameTip(node);
+					}
+				}, true,'json');
+				return false;
+			}
 
 			function checkNameTip(node) {
 				//创建元素，并显示
@@ -61,6 +74,13 @@
 					parentE.removeChild(newSubE);
 				}, 1500);
 			}
+			
+			var convert_FormData_to_json2 = function (formData) {
+			    var objData = {};
+			    formData.forEach((value, key) => objData[key] = value);
+			    return JSON.stringify(objData);
+			};		
+			
 		</script>
 	</body>
 </html>
