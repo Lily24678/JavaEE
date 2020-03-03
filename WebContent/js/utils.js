@@ -34,8 +34,8 @@ var Utils = {
 		//2. 设置状态改变的监听 回调函数.
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				debugger;
 				try {
+					debugger;
 					//var result = JSON.parse(xhr.responseText);//解析json字符串
 					var result = eval('(' + xhr.responseText + ')');//解析json字符串
 					callback(result);

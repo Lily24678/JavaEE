@@ -12,6 +12,7 @@ import com.lsy.code.demo.utils.MassageHandler;
 import com.lsy.code.demo.utils.StringUtils;
 
 import net.sf.json.JSONObject;
+import net.sf.json.xml.XMLSerializer;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
@@ -38,7 +39,9 @@ public class LoginServlet extends HttpServlet {
 		BaseMassage<?> massage = MassageHandler.createMsgFailure("用户名不正确");
 		//转换成JSON字符串
 		JSONObject jsonObject = JSONObject.fromObject(massage);
-		if(!"username".equals(username))resp.getWriter().print(jsonObject.toString());
+		XMLSerializer xmlSerializer = new XMLSerializer();
+		String xml = xmlSerializer.write(jsonObject);
+		if(!"username".equals(username))resp.getWriter().print(xml);
 		
 	}
 
