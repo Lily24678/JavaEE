@@ -17,7 +17,7 @@ var Utils = {
 	},
 
 	//发送请求
-	async: function(method, params, url, callback, isAsync) {
+	async: function(method, params, url, callback, isAsync,dataType) {
 		//1. 创建异步对象
 		var xhr;
 		try { //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
@@ -34,8 +34,11 @@ var Utils = {
 		//2. 设置状态改变的监听 回调函数.
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
+				if("xml"==dataType.toLowerCase()){
+					var result = xhr.responseXML;
+					callback(result);
+				}
 				try {
-					debugger;
 					//var result = JSON.parse(xhr.responseText);//解析json字符串
 					var result = eval('(' + xhr.responseText + ')');//解析json字符串
 					callback(result);
@@ -48,12 +51,17 @@ var Utils = {
 		method = method.toUpperCase();
 		//3. 规定请求的类型，URL，请求是否应该进行异步处理，
 		xhr.open(method, url, isAsync);
+		
+		if("xml"==dataType.toLowerCase()){
+			xhr.overrideMimeType('application/xml');
+		}
+		//设置发送数据的请求格式
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
 		if (method == "GET") {
 			//4. 发送请求到服务器。
 			xhr.send();
 		} else if (method == "POST") {
-			//设置发送数据的请求格式
-			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			//4. 发送请求到服务器。
 			var data = '';
 			for(var key in params){

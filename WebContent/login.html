@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="./js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/login" method="get">
+		<form action="/JavaEE/user?method=login" method="post">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -36,12 +36,12 @@
 					//异步校验
 					Utils.async("post", {
 						username: this.value
-					}, "/JavaEE/login", function(data) {
+					}, "/JavaEE/user?method=checkName", function(data) {
 						if(200!=data.code){
 							node = document.createTextNode(data.msg);
 							checkNameTip(node);
 						}
-					}, true);
+					}, true,'json');
 				}
 
 			});
