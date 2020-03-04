@@ -29,4 +29,14 @@ public class CreateDataUtils {
 		}
 		return flag;
 	}
+	public static int isExist(String username,String password) {
+		int flag = 0;
+		for (User user : list) {
+			if (user.getUsername().equals(username)&&user.getPassword().equals(password)) {
+				flag=1;
+				break;
+			}
+		}
+		return flag;
+	}
 }

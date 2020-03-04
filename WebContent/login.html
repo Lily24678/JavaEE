@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="./js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=login" method="post">
+		<form action="/JavaEE/user?method=login" method="post" id="loginForm" onsubmit="return checkUser()">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -20,6 +20,10 @@
 			<div class="form-sub1">
 				<label for="password">登录密码：</label>
 				<input type="password" required="required" name="password" value="" id="password" />
+			</div>
+			<div class="form-sub1">
+			<input id="input2" type="checkbox" name="autologin" value="1"/><label for="input2">自动登录</label>
+			<input id="input1" type="checkbox" name="persis" value="1"/><label for="input1">记住密码</label>
 			</div>
 			<div class="form-sub1">
 				<input type="submit" value="提交" />
@@ -44,6 +48,26 @@
 					}, true,'json');
 				}
 
+			});
+			
+			function  checkUser() {
+				var flag = true;
+				var formData = new FormData(document.getElementById("loginForm"));
+				var params = Utils.convert_FormData_to_json(formData);
+				//异步校验
+				Utils.async("post",params, "/JavaEE/user?method=checkUserLogin", function(data) {
+					if(200!=data.code){
+						flag=false;
+						window.alert(data.msg); 
+					}
+				}, false,'json');
+				return flag;
+			}	
+			
+			Utils.on(document.getElementById("input2"), "change", function() {
+				if(this.checked){
+					document.getElementById("input1").checked="checked";
+				}
 			});
 
 			function checkNameTip(node) {

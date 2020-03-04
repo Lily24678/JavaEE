@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="./js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=regist" method="post" id="registForm" onsubmit="return checkUser();">
+		<form action="/JavaEE/user?method=regist" method="post" id="registForm" onsubmit="return checkUserTip();">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -21,6 +21,7 @@
 				<label for="password">登录密码：</label>
 				<input type="password" required="required" name="password" value="" id="password" />
 			</div>
+			<div id="tip1" style="display: none;"><b style="color: red;">用户名、密码不可为空</b></div>
 			<div class="form-sub1">
 				<input type="submit" value="提交" />
 			</div>
@@ -47,16 +48,23 @@
 			});
 			
 			//校验是否存在，存在则阻止表单提交
-			function checkUser() {
+			function checkUserTip() {
+				var flag=true;
 				var formData = new FormData(document.getElementById("registForm"));
-				var params = convert_FormData_to_json2(formData);
+				var params = Utils.convert_FormData_to_json(formData);
 				Utils.async("post", JSON.parse(params), "/JavaEE/user?method=checkNameRegist", function(data) {
 					if(200!=data.code){
-						node = document.createTextNode(data.msg);
-						checkNameTip(node);
+						flag=false;//阻止表单提交
+						var tip1 = document.getElementById("tip1");
+						tip1.style.display="";
+						tip1.innerHTML='<b style="color: red;">'+data.msg+'</b>';
+						//隐藏提示
+						setTimeout(function() {
+							tip1.style.display="none";
+						}, 1500);	
 					}
-				}, true,'json');
-				return false;
+				}, false,'json');
+				return flag;
 			}
 
 			function checkNameTip(node) {
@@ -74,12 +82,7 @@
 					parentE.removeChild(newSubE);
 				}, 1500);
 			}
-			
-			var convert_FormData_to_json2 = function (formData) {
-			    var objData = {};
-			    formData.forEach((value, key) => objData[key] = value);
-			    return JSON.stringify(objData);
-			};		
+				
 			
 		</script>
 	</body>
