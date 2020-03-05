@@ -46,6 +46,9 @@ public class FileServlet extends BaseServlet{
 		}
 		is.close();
 	}
+	public void uploadFile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	}
 	
 	
 	public static String base64EncodeFileName(String fileName) {

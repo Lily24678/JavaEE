@@ -3,7 +3,6 @@ package com.lsy.code.demo.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,8 +51,6 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
-		ServletContext context = request.getServletContext();
-		Integer count = (Integer) context.getAttribute("count");
 		
 		BaseMassage<?> massage = MassageHandler.createMsgSuccess("登录成功");
 		if (StringUtils.isBlank(username)||StringUtils.isBlank(password)) {

@@ -48,7 +48,6 @@
   	<servlet-name>servlet2</servlet-name>
   	<url-pattern>/servlet2</url-pattern>
   </servlet-mapping>
-  
   <!-- listener的配置 -->
   <listener>
   	<listener-class>com.lsy.code.listener.ServletContextListener1</listener-class><!-- 实现类的全类名 -->
@@ -68,6 +67,10 @@
   <listener>
   	<listener-class>com.lsy.code.listener.ServletRequestAttributeListener1</listener-class>
   </listener>
+  <!-- 两分钟后session 过期 -->
+  <session-config>
+  	<session-timeout>2</session-timeout>
+  </session-config>
   
   <!-- filter的配置 -->
   <filter>
