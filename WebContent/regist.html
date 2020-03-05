@@ -52,7 +52,7 @@
 				var flag=true;
 				var formData = new FormData(document.getElementById("registForm"));
 				var params = Utils.convert_FormData_to_json(formData);
-				Utils.async("post", JSON.parse(params), "/JavaEE/user?method=checkNameRegist", function(data) {
+				Utils.async("post", params, "/JavaEE/user?method=checkNameRegist", function(data) {
 					if(200!=data.code){
 						flag=false;//阻止表单提交
 						var tip1 = document.getElementById("tip1");

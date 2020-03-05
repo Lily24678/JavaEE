@@ -3,6 +3,7 @@ package com.lsy.code.demo.servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import net.sf.json.JSONObject;
 
 @SuppressWarnings("serial")
 public class UserServlet extends BaseServlet {
+
 	
 	public String regist(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");//响应字符流乱码
@@ -36,15 +38,7 @@ public class UserServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Cookie cookie = ServletUtils.getCookie("username", request);
-		if (null!=cookie) {
-			String value = cookie.getValue();
-			String[] split = value.split("-");
-			if(split.length==3&&"1".equals(split[2])&&CreateDataUtils.isExist(cookie.getName(), value)==1) {
-				return "/index.html";
-			}
-		}
-		return "login.html";		
+		return "/index.html";		
 	}
 	
 	/**
@@ -58,6 +52,8 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
+		ServletContext context = request.getServletContext();
+		Integer count = (Integer) context.getAttribute("count");
 		
 		BaseMassage<?> massage = MassageHandler.createMsgSuccess("登录成功");
 		if (StringUtils.isBlank(username)||StringUtils.isBlank(password)) {

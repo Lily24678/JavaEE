@@ -16,7 +16,7 @@ public class GenericEncodingFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("Filter实例 创建 ：服务器启动时创建。");
+		System.out.println("Filter实例 创建 ：服务器启动时创建。---GenericEncodingFilter");
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class GenericEncodingFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		System.out.println("Filter实例 销毁：服务器关闭时销毁。");
+		System.out.println("Filter实例 销毁：服务器关闭时销毁。---GenericEncodingFilter");
 	}
 
 }

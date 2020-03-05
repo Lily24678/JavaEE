@@ -1,10 +1,12 @@
 package com.lsy.code.demo.utils;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtils {
-	public static Cookie createCookie(String name,String value,HttpServletRequest request) {
+	public static Cookie createCookie(String name,String value,ServletRequest servletRequest) {
+		HttpServletRequest request=(HttpServletRequest)servletRequest;
 		Cookie cookie = new Cookie(name, value);
 		
 		// 为 Cookie 设置有效期，不会受到浏览器关闭的影响
@@ -20,13 +22,16 @@ public class ServletUtils {
 		return cookie;
 	}
 	
-	public static Cookie getCookie(String name,HttpServletRequest request) {
+	public static Cookie getCookie(String name,ServletRequest servletRequest) {
+		HttpServletRequest request=(HttpServletRequest)servletRequest;
 		Cookie cookie2=null;
 		Cookie[] cookies = request.getCookies(); 
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals(name)) {
-				cookie2=cookie;
-				break;
+		if (null!=cookies) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(name)) {
+					cookie2=cookie;
+					break;
+				}
 			}
 		}
 		return cookie2;

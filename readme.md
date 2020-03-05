@@ -3,7 +3,7 @@
 使用步骤：
 - 1、实现Servlet接口。
 - 2、将实现类配置到服务器中。web.xml
-> 通用servlet 
+> 通用servlet（BaseServlet）
 
 ## Listener
 >- 事件源：Servlet中的三个域对象,ServletContext,HttpSession,ServletRequest.
@@ -27,8 +27,15 @@ WEB中的监听器共有三类八种(监听三个域对象):
 # Demo案例
 - ServletUtils(cookie)
 - utils.js(纯js代码：)
-1.处理中文乱码（filter处理中文乱码）
-2、进入首页5s后调整到登录页面
-3、输入用户名和密码后（异步校验），跳转到文件的下载与上传页面（重定向与转发的区别）（实现文件的下载与上传）
-4、实现文件的上传与下载功能
+1.处理中文乱码（GenericEncodingFilter）
+2、实现自动登录（LoginFilter）
+3、注册、登录，输入用户名和密码后（异步校验）。
+4、文件的下载与上传页面?????
+5、实现登录校验
 
+#JSP?????
+
+#待定
+-  文件的下载与上传页面?????
+- JSP?????
+- DefaultServlet??
