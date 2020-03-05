@@ -18,6 +18,6 @@ out.println("Your IP address is " + request.getRemoteAddr());
 
   今天的日期是: <%= (new java.util.Date()).toLocaleString()%>
   
-  <%@ include file="file.html" %>
+  <%@ include file="../file.html" %>
 </body>
 </html>
