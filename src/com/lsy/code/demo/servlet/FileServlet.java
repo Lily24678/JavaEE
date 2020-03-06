@@ -31,6 +31,13 @@ import net.sf.json.JSONObject;
 @SuppressWarnings("serial")
 public class FileServlet extends BaseServlet {
 
+	/**
+	 * 	下载文件到浏览器上
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void downFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String filename = request.getParameter("filename");
@@ -61,6 +68,13 @@ public class FileServlet extends BaseServlet {
 		is.close();
 	}
 
+	/**
+	 *  	上传文件到指定目录
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public void uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 生成工厂
@@ -102,6 +116,9 @@ public class FileServlet extends BaseServlet {
 				}
 			} catch (FileUploadException e) {
 				e.printStackTrace();
+				BaseMessage<?> message = MessageHandler.createMsgFailure("文件上传成功");
+				JSONObject jsonObject = JSONObject.fromObject(message);
+				response.getWriter().print(jsonObject);
 			}
 		}
 		BaseMessage<?> message = MessageHandler.createMsgSuccess("文件上传成功");

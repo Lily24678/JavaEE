@@ -15,10 +15,14 @@
 	<a href="/JavaEE/file/0.jpg" download="0.jpg">超链接下载图片0.jpg</a>
 	<br>
 	<a href="/JavaEE/file?filename=0.jpg">手动设置下载0.jpg</a>
-	<form action="/JavaEE/file?method=uploadFile" method="post" enctype="multipart/form-data" onsubmit="return uploadFile();">
+	<form action="/JavaEE/file?method=uploadFile" method="post" enctype="multipart/form-data" onsubmit="return uploadFile();" id="uploadFileForm">
 		<div class="form-sub1">
 			<label for="file">选择文件:</label>
 			<input type="file" name="file" value="" id="file"/>
+		</div>
+		<div class="form-sub1">
+			<label for="file">input未设置name,在提交表单时不会提交该input：例</label>
+			<input type="text" name="" value=""/>
 		</div>
 		<div class="form-sub1">
 			<input type="submit" value="提交"/>
@@ -28,6 +32,19 @@
 	Utils.on(document.getElementById("file"),"change",function(){//type="file"时，文件名一致，位置不一致也会被监听到
 		window.alert("文件改变啦");
 	});
+	function uploadFile() {
+		var formData = new FormData(document.getElementById("uploadFileForm"));
+		var params = Utils.convert_FormData_to_json(formData);
+		Utils.async("post", params, "/JavaEE/file?method=uploadFile", function(data) {
+			if(200!=data.code){
+				window.alert(data.msg);
+			}else{
+				window.alert(data.msg);
+				
+			}
+		}, false,'json');	
+		return false;
+	} 
 	</script>
 </body>
 </html>
