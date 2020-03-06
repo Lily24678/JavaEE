@@ -1,18 +1,18 @@
 package com.lsy.code.demo.utils;
 
-public class BaseMassage<T> {
+public class BaseMessage<T> {
 	private int code;
 	private String msg;
 	private Object data;
 
-	public BaseMassage(int code, String msg, Object data) {
+	public BaseMessage(int code, String msg, Object data) {
 		super();
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
 	}
 
-	public BaseMassage(int code, String msg) {
+	public BaseMessage(int code, String msg) {
 		super();
 		this.code = code;
 		this.msg = msg;

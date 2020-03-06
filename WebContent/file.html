@@ -3,22 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>文件上传与下载</title>
+<script type="text/javascript" src="./js/utils.js"></script>
 <style type="text/css">
-input {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
+	.form-sub1 {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 </style>
 </head>
 <body>
 	<a href="/JavaEE/file/0.jpg" download="0.jpg">超链接下载图片0.jpg</a>
 	<br>
 	<a href="/JavaEE/file?filename=0.jpg">手动设置下载0.jpg</a>
-	<form action="" method="post" enctype="multipart/form-data">
-		<label for="file">选择文件:</label>
-		<input type="file" name="file" value="" id="file"/>
-		<br/>
-		<input type="submit" value="提交"/>
+	<form action="/JavaEE/file?method=uploadFile" method="post" enctype="multipart/form-data" onsubmit="return uploadFile();">
+		<div class="form-sub1">
+			<label for="file">选择文件:</label>
+			<input type="file" name="file" value="" id="file"/>
+		</div>
+		<div class="form-sub1">
+			<input type="submit" value="提交"/>
+		</div>
 	</form>
+	<script type="text/javascript">
+	Utils.on(document.getElementById("file"),"change",function(){//type="file"时，文件名一致，位置不一致也会被监听到
+		window.alert("文件改变啦");
+	});
+	</script>
 </body>
 </html>
