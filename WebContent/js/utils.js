@@ -16,8 +16,16 @@ var Utils = {
 		return false;
 	},
 
-	//发送请求
-	async: function(method, params, url, callback, isAsync,dataType) {
+	/**
+	 * @param method:方法名get、post
+	 * @param params:参数FormData,json对象
+	 * @param url：访问地址
+	 * @param callback：回调函数
+	 * @param isAsync:异步true，同步false
+	 * @param processData:参数数FormData类型无需解析false，默认true需解析参数
+	 * @param contentType:参数数FormData类型无需设置contentType，默认true需设置contentType
+	 */
+	async: function(method, params, url, callback, isAsync,processData,contentType) {
 		//1. 创建异步对象
 		var xhr;
 		try { //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
@@ -51,7 +59,7 @@ var Utils = {
 		method = method.toUpperCase();
 		//3. 规定请求的类型，URL，请求是否应该进行异步处理，
 		xhr.open(method, url, isAsync);
-		
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		if("xml"==dataType.toLowerCase()){
 			xhr.overrideMimeType('application/xml');
 		}
@@ -61,6 +69,7 @@ var Utils = {
 			xhr.send();
 		} else if (method == "POST") {
 			xhr.send(params);
+			
 		}
 	},
 	
@@ -80,10 +89,5 @@ var Utils = {
 	    }
 	    return "";		
 	},
-	
-	convert_FormData_to_json:function(formData){
-	    var objData = {};
-	    formData.forEach((value, key) => objData[key] = value);
-	    return objData;
-	}
+
 }

@@ -2,6 +2,9 @@ package com.lsy.code.demo.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +82,12 @@ public class UserServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	public void checkNameLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Map<String, String[]> parameterMap = request.getParameterMap();
+		Set<Entry<String,String[]>> entrySet = parameterMap.entrySet();
+		for (Entry<String, String[]> entry : entrySet) {
+			System.out.println(entry.getKey()+"--"+entry.getValue());
+		}
+		
 		String username = request.getParameter("username");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("用户名正确");
 		if (CreateDataUtils.isExist(username) == 0)

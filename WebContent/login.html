@@ -54,9 +54,8 @@
 			function  checkUser() {
 				var flag = true;
 				var formData = new FormData(document.getElementById("loginForm"));
-				var params = Utils.convert_FormData_to_json(formData);
 				//异步校验
-				Utils.async("post",params, "/JavaEE/user?method=checkUserLogin", function(data) {
+				Utils.async("post",formData, "/JavaEE/user?method=checkUserLogin", function(data) {
 					if(200!=data.code){
 						flag=false;
 						window.alert(data.msg); 
