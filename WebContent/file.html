@@ -34,8 +34,7 @@
 	});
 	function uploadFile() {
 		var formData = new FormData(document.getElementById("uploadFileForm"));
-		var params = Utils.convert_FormData_to_json(formData);
-		Utils.async("post", params, "/JavaEE/file?method=uploadFile", function(data) {
+		Utils.async("post", formData, "/JavaEE/file?method=uploadFile", function(data) {
 			if(200!=data.code){
 				window.alert(data.msg);
 			}else{

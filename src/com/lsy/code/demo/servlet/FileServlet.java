@@ -80,9 +80,10 @@ public class FileServlet extends BaseServlet {
 		// 生成工厂
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		// 设置缓存路径
-		diskFileItemFactory.setRepository(new File("G:/UPLOAD"));
+		diskFileItemFactory.setRepository(new File("F:/Demo/file/temp/"));
 		// 设置大小限制，即上传的文件大于多少的时候需要缓存
 		diskFileItemFactory.setSizeThreshold(1024 * 1024 * 3);
+		System.out.println(ServletFileUpload.isMultipartContent(request));
 		if (ServletFileUpload.isMultipartContent(request)) {// 检查表单enctype="multipart/form-data"
 			// 创建解析类
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
@@ -100,7 +101,7 @@ public class FileServlet extends BaseServlet {
 						// 目录分离
 						String hexString = Integer.toHexString(fileName.hashCode());
 						String path = hexString.charAt(0) + "/" + hexString.charAt(1);
-						File destFile = new File("F:/upload/" + path);
+						File destFile = new File("F:/Demo/file/upload_file/" + path);
 						destFile.mkdirs();
 						File file = new File(destFile, fileName);
 						// 输出流
@@ -109,6 +110,8 @@ public class FileServlet extends BaseServlet {
 						IOUtils.copy(is, os);
 						os.close();
 						is.close();
+						//删除FileItemd的主体内容，删除临时文件
+						fileItem.delete();
 					}
 //        			else {
 //        				System.out.println(fileItem.getString());
@@ -116,10 +119,16 @@ public class FileServlet extends BaseServlet {
 				}
 			} catch (FileUploadException e) {
 				e.printStackTrace();
-				BaseMessage<?> message = MessageHandler.createMsgFailure("文件上传成功");
+				BaseMessage<?> message = MessageHandler.createMsgFailure(e.getMessage());
 				JSONObject jsonObject = JSONObject.fromObject(message);
-				response.getWriter().print(jsonObject);
+				response.getWriter().print(jsonObject);				
+				return;
 			}
+		}else {
+			BaseMessage<?> message = MessageHandler.createMsgFailure("表单未正确设置enctype");
+			JSONObject jsonObject = JSONObject.fromObject(message);
+			response.getWriter().print(jsonObject);
+			return;
 		}
 		BaseMessage<?> message = MessageHandler.createMsgSuccess("文件上传成功");
 		JSONObject jsonObject = JSONObject.fromObject(message);

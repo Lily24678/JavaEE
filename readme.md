@@ -30,7 +30,7 @@ WEB中的监听器共有三类八种(监听三个域对象):
 1.处理中文乱码（GenericEncodingFilter）
 2、实现自动登录（LoginFilter）
 3、注册、登录，输入用户名和密码后（异步校验）。
-4、实现文件的下载与上传
+4、实现文件的下载与上传(commons-fileupload-xxx.jar)
 5、实现登录校验
 
 #JSP????? vs EL表达式？？？

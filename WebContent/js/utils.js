@@ -55,19 +55,12 @@ var Utils = {
 		if("xml"==dataType.toLowerCase()){
 			xhr.overrideMimeType('application/xml');
 		}
-		//设置发送数据的请求格式
-		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		
 		if (method == "GET") {
 			//4. 发送请求到服务器。
 			xhr.send();
 		} else if (method == "POST") {
-			//4. 发送请求到服务器。
-			var data = '';
-			for(var key in params){
-				data+=key+"="+params[key]+"&";
-			}
-			xhr.send(data);
+			xhr.send(params);
 		}
 	},
 	
