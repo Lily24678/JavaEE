@@ -32,7 +32,6 @@ var Utils = {
 
 		//2. 设置状态改变的监听 回调函数.
 		xhr.onreadystatechange = function() {
-			debugger;
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				if ("xml" == dataType) {
 					var result = xhr.responseXML;
