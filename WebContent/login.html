@@ -22,8 +22,8 @@
 				<input type="password" required="required" name="password" value="" id="password" />
 			</div>
 			<div class="form-sub1">
-			<input id="input2" type="checkbox" name="autologin" value="1"/><label for="input2">自动登录</label>
-			<input id="input1" type="checkbox" name="persis" value="1"/><label for="input1">记住密码</label>
+				<input id="input2" type="checkbox" name="autologin" value="1" /><label for="input2">自动登录</label>
+				<input id="input1" type="checkbox" name="persis" value="1" /><label for="input1">记住密码</label>
 			</div>
 			<a href="/JavaEE/regist.html"><label>注册</label></a>
 			<div class="form-sub1">
@@ -42,31 +42,31 @@
 					Utils.async("post", {
 						username: this.value
 					}, "/JavaEE/user?method=checkNameLogin", function(data) {
-						if(200!=data.code){
+						if (200 != data.code) {
 							node = document.createTextNode(data.msg);
 							checkNameTip(node);
 						}
-					}, true,'json');
+					}, true, 'json');
 				}
 
 			});
-			
-			function  checkUser() {
+
+			function checkUser() {
 				var flag = true;
 				var formData = new FormData(document.getElementById("loginForm"));
 				//异步校验
-				Utils.async("post",formData, "/JavaEE/user?method=checkUserLogin", function(data) {
-					if(200!=data.code){
-						flag=false;
-						window.alert(data.msg); 
+				Utils.async("post", formData, "/JavaEE/user?method=checkUserLogin", function(data) {
+					if (200 != data.code) {
+						flag = false;
+						window.alert(data.msg);
 					}
-				}, false,'json');
+				}, false,false,false, 'json');
 				return flag;
-			}	
-			
+			}
+
 			Utils.on(document.getElementById("input2"), "change", function() {
-				if(this.checked){
-					document.getElementById("input1").checked="checked";
+				if (this.checked) {
+					document.getElementById("input1").checked = "checked";
 				}
 			});
 
