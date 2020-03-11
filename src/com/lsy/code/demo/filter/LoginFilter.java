@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.lsy.code.demo.utils.CreateDataUtils;
 import com.lsy.code.demo.utils.ServletUtils;
@@ -27,16 +28,17 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
 		Cookie cookie = ServletUtils.getCookie("username", request);
 		if (null != cookie) {
 			String value = cookie.getValue();
 			String[] split = value.split("-");
 			if (split.length == 3 && "1".equals(split[2]) && CreateDataUtils.isExist(split[0], split[1]) == 1) {
-				req.getRequestDispatcher("/index.html").forward(request, response);;
-				return;
+				chain.doFilter(request, response);
 			}
 		}
-		chain.doFilter(request, response);
+		//req.getRequestDispatcher("/login.html").forward(request, response);;
+		resp.sendRedirect(req.getContextPath()+"/login.html");
 	}
 
 	@Override

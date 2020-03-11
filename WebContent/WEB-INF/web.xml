@@ -23,14 +23,14 @@
   
   <!-- servlet的配置 -->
   <!-- DefaultServlet配置作用？？？？ -->
-<!--   <servlet>
+  <servlet>
   	<servlet-name>default</servlet-name>
   	<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>default</servlet-name>
   	<url-pattern>/</url-pattern>
-  </servlet-mapping> -->
+  </servlet-mapping>
   <servlet>
 	  <servlet-name>servlet1</servlet-name><!-- 自定义 -->
 	  <servlet-class>com.lsy.code.servlet.Servlet1</servlet-class><!-- 实现类的全类名 -->
@@ -134,6 +134,7 @@
   </filter>
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/login.html</url-pattern>
+  	<url-pattern>/file.html</url-pattern>
+  	<url-pattern>/index.html</url-pattern>
   </filter-mapping>
 </web-app>

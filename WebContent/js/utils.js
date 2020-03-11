@@ -26,7 +26,7 @@ var Utils = {
 	 * @param contentType:参数数FormData类型无需设置contentType，默认true需设置contentType
 	 * @param dataType:xml,默认json
 	 */
-	async: function(method, params, url, callback, isAsync, processData, contentType,dataType) {
+	async: function(method, params, url, callback, isAsync ,dataType,processData, contentType) {
 		//1. 创建异步对象
 		var xhr = createXHR();
 
@@ -50,15 +50,14 @@ var Utils = {
 
 		//3. 规定请求的类型，URL，请求是否应该进行异步处理，
 		xhr.open(method, url, isAsync);
+		
 		//初始化其他设置
 		var data=initXHR(xhr,params,processData,contentType,dataType);
-
-
 		if (method.toUpperCase() == "GET") {
 			//4. 发送请求到服务器。
 			xhr.send();
 		} else if (method.toUpperCase() == "POST") {
-			xhr.send(params);
+			xhr.send(data);
 
 		}
 	},

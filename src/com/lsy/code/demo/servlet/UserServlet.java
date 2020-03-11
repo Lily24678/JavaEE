@@ -55,6 +55,7 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
+		
 
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
