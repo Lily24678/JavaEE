@@ -2,9 +2,6 @@ package com.lsy.code.demo.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +26,9 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		List<User> list = CreateDataUtils.getRegistedUsers();
 		list.add(new User(username, password));
+		//清空登录信息
+		Cookie cookie = ServletUtils.getCookie("username", request);
+		ServletUtils.removeCookie(cookie, request, response);
 		return "/login.html";
 	}
 
@@ -55,7 +55,6 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
-		
 
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
@@ -63,12 +62,11 @@ public class UserServlet extends BaseServlet {
 		} else if (CreateDataUtils.isExist(username, password) == 0) {
 			massage = MessageHandler.createMsgFailure("用户名或者登录密码错误");
 		} else {
-			Cookie cookie = ServletUtils.createCookie("username", username, request);
+			ServletUtils.addCookie("username", username, request,response);
 			if (StringUtils.isNotBlank(persis))
-				cookie = ServletUtils.createCookie("username", username + "-" + password, request);
+				ServletUtils.addCookie("username", username + "-" + password, request,response);
 			if (StringUtils.isNotBlank(autologin))
-				cookie = ServletUtils.createCookie("username", username + "-" + password + "-" + autologin, request);
-			response.addCookie(cookie);
+				ServletUtils.addCookie("username", username + "-" + password + "-" + autologin, request,response);
 		}
 		// 转换成JSON字符串
 		JSONObject jsonObject = JSONObject.fromObject(massage);
@@ -83,12 +81,6 @@ public class UserServlet extends BaseServlet {
 	 * @throws IOException
 	 */
 	public void checkNameLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		Set<Entry<String,String[]>> entrySet = parameterMap.entrySet();
-		for (Entry<String, String[]> entry : entrySet) {
-			System.out.println(entry.getKey()+"--"+entry.getValue());
-		}
-		
 		String username = request.getParameter("username");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("用户名正确");
 		if (CreateDataUtils.isExist(username) == 0)

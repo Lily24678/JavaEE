@@ -1,12 +1,16 @@
 package com.lsy.code.demo.utils;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class ServletUtils {
-	public static Cookie createCookie(String name,String value,ServletRequest servletRequest) {
+	public static void addCookie(String name,String value,ServletRequest servletRequest,ServletResponse servletResponse) {
 		HttpServletRequest request=(HttpServletRequest)servletRequest;
+		HttpServletResponse response =(HttpServletResponse) servletResponse;
+		
 		Cookie cookie = new Cookie(name, value);
 		
 		// 为 Cookie 设置有效期，不会受到浏览器关闭的影响
@@ -19,7 +23,7 @@ public class ServletUtils {
 		//设置cookie的有效访问路径,只有在当前项目下login.html中才能访问到cookie
 		//cookie.setPath("/JavaEE/login.html"); 
 		
-		return cookie;
+		response.addCookie(cookie);;
 	}
 	
 	public static Cookie getCookie(String name,ServletRequest servletRequest) {
@@ -35,6 +39,16 @@ public class ServletUtils {
 			}
 		}
 		return cookie2;
+	}
+	
+	public static void removeCookie(Cookie cookie,ServletRequest servletRequest,ServletResponse servletResponse) {
+		HttpServletRequest request=(HttpServletRequest)servletRequest;
+		HttpServletResponse response =(HttpServletResponse) servletResponse;
+		if(null!=cookie) {
+			cookie.setMaxAge(0);
+			cookie.setPath(request.getContextPath());
+			response.addCookie(cookie);
+		}
 	}
 
 }

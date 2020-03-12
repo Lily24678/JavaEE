@@ -12,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lsy.code.demo.utils.CreateDataUtils;
 import com.lsy.code.demo.utils.ServletUtils;
 /**
  * 自动登录的功能实现
@@ -31,11 +30,8 @@ public class LoginFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 		Cookie cookie = ServletUtils.getCookie("username", request);
 		if (null != cookie) {
-			String value = cookie.getValue();
-			String[] split = value.split("-");
-			if (split.length == 3 && "1".equals(split[2]) && CreateDataUtils.isExist(split[0], split[1]) == 1) {
-				chain.doFilter(request, response);
-			}
+			chain.doFilter(request, response);
+			return;
 		}
 		//req.getRequestDispatcher("/login.html").forward(request, response);;
 		resp.sendRedirect(req.getContextPath()+"/login.html");

@@ -12,7 +12,7 @@
 		
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=login" method="post" id="loginForm" onsubmit="return checkUser()" enctype="application/x-www-form-urlencoded">
+		<form action="/JavaEE/user?method=login" method="post" id="loginForm" onsubmit="return checkUser()">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -55,13 +55,14 @@
 			function checkUser() {
 				var flag = true;
 				var formData = new FormData(document.getElementById("loginForm"));
+				var data = JSON.stringify(formData);
 				//异步校验
-				Utils.async("post", formData, "/JavaEE/user?method=checkUserLogin", function(data) {
+				Utils.async("post", convert_FormData_to_json(formData), "/JavaEE/user?method=checkUserLogin", function(data) {
 					if (200 != data.code) {
 						flag = false;
 						window.alert(data.msg);
 					}
-				}, false, 'json',false,false);
+				}, false, 'json');
 				return flag;
 			}
 

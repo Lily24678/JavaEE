@@ -126,3 +126,11 @@ function initXHR(xhr,params,processData,contentType,dataType){
 	}	
 	return data;
 }
+
+var convert_FormData_to_json = function (formData) {
+    var objData = {};
+    for (var entry of formData.entries()){
+        objData[entry[0]] = entry[1];
+    }
+    return objData;
+};
