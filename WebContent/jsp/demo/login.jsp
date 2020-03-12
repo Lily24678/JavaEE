@@ -1,45 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>ç»å½</title>
+		<title>登录</title>
 		<style type="text/css">
 			.form-sub1 {
 				margin-top: 10px;
 				margin-bottom: 10px;
 			}
 		</style>
-		<script type="text/javascript" src="./js/utils.js"></script>
+		
 	</head>
 	<body>
 		<form action="/JavaEE/user?method=login" method="post" id="loginForm" onsubmit="return checkUser()">
 			<div class="form-sub1" id="check-username">
-				<label for="username">ç¨æ·åï¼</label>
+				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
 			</div>
 			<div class="form-sub1">
-				<label for="password">ç»å½å¯ç ï¼</label>
+				<label for="password">登录密码：</label>
 				<input type="password" required="required" name="password" value="" id="password" />
 			</div>
 			<div class="form-sub1">
-				<input id="input2" type="checkbox" name="autologin" value="1" /><label for="input2">èªå¨ç»å½</label>
-				<input id="input1" type="checkbox" name="persis" value="1" /><label for="input1">è®°ä½å¯ç </label>
+				<input id="input2" type="checkbox" name="autologin" value="1" /><label for="input2">自动登录</label>
+				<input id="input1" type="checkbox" name="persis" value="1" /><label for="input1">记住密码</label>
 			</div>
-			<a href="/JavaEE/regist.html"><label>æ³¨å</label></a>
+			<a href="/JavaEE/regist.html"><label>注册</label></a>
 			<div class="form-sub1">
-				<input type="submit" value="æäº¤" />
+				<input type="submit" value="提交" />
 			</div>
 		</form>
+		<script type="text/javascript" src="./js/utils.js"></script>
 		<script type="text/javascript">
-			//å¼æ­¥æ ¡éªç¨æ·åæ¯å¦å­å¨
+			//异步校验用户名是否存在
 			Utils.on(document.getElementById("username"), "blur", function() {
 				var node = '';
 				if (Utils.strIsBlank(this.value)) {
-					node = document.createTextNode("è¯·è¾å¥æ­£ç¡®çç¨æ·åã");
+					node = document.createTextNode("请输入正确的用户名。");
 					checkNameTip(node);
 				} else {
-					//å¼æ­¥æ ¡éª
+					//异步校验
 					Utils.async("post", {
 						username: this.value
 					}, "/JavaEE/user?method=checkNameLogin", function(data) {
@@ -55,13 +56,14 @@
 			function checkUser() {
 				var flag = true;
 				var formData = new FormData(document.getElementById("loginForm"));
-				//å¼æ­¥æ ¡éª
-				Utils.async("post", formData, "/JavaEE/user?method=checkUserLogin", function(data) {
+				var data = JSON.stringify(formData);
+				//异步校验
+				Utils.async("post", convert_FormData_to_json(formData), "/JavaEE/user?method=checkUserLogin", function(data) {
 					if (200 != data.code) {
 						flag = false;
 						window.alert(data.msg);
 					}
-				}, false, 'json',false,false);
+				}, false, 'json');
 				return flag;
 			}
 
@@ -72,7 +74,7 @@
 			});
 
 			function checkNameTip(node) {
-				//åå»ºåç´ ï¼å¹¶æ¾ç¤º
+				//创建元素，并显示
 				var newSubE = document.createElement("b");
 				newSubE.style = 'color: red;';
 				newSubE.appendChild(node);
@@ -81,7 +83,7 @@
 				var exitSubE = document.getElementById("username");
 				parentE.appendChild(newSubE, exitSubE);
 
-				//1så é¤æ°åå»ºçåç´ 
+				//1s删除新创建的元素
 				setTimeout(function() {
 					parentE.removeChild(newSubE);
 				}, 1500);

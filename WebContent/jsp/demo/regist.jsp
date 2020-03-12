@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="./js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=regist" method="post" id="registForm" onsubmit="return checkUserTip();">
+		<form action="/JavaEE/jsp/demo/login.jsp" method="post" id="registForm" onsubmit="return checkUserTip();">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -52,7 +52,7 @@
 			function checkUserTip() {
 				var flag=true;
 				var formData = new FormData(document.getElementById("registForm"));
-				Utils.async("post", params, "/JavaEE/user?method=checkNameRegist", function(data) {
+				Utils.async("post", convert_FormData_to_json(formData), "/JavaEE/user?method=checkNameRegist", function(data) {
 					if(200!=data.code){
 						flag=false;//阻止表单提交
 						var tip1 = document.getElementById("tip1");
@@ -63,7 +63,7 @@
 							tip1.style.display="none";
 						}, 1500);	
 					}
-				},false, 'json',false,false);
+				},false, 'json');
 				return flag;
 			}
 

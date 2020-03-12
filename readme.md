@@ -34,7 +34,7 @@ WEB中的监听器共有三类八种(监听三个域对象):
 5、实现登录校验
 
 #JSP????? vs EL表达式？？？
-> 文件夹jsp
+- <%@ page session="true"%>:知识点----session与cookie的关系(request.getSession)
 
 
 #待定

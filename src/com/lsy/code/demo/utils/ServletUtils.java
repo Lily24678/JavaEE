@@ -16,7 +16,7 @@ public class ServletUtils {
 		// 为 Cookie 设置有效期，不会受到浏览器关闭的影响
 		cookie.setMaxAge(60*60*24);
 		//cookie保存在浏览器内存，关闭移除
-		//cookie.setMaxAge(-1);
+		//cookie.setMaxAge(-1);//默认值-1
 		
 		//设置cookie的有效访问路径
 		cookie.setPath(request.getContextPath());//request.getContextPath()->/JavaEE 
