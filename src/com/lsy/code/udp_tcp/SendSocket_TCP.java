@@ -1,4 +1,4 @@
-package com.lsy.code.demo.udp_tcp;
+package com.lsy.code.udp_tcp;
 
 import java.io.IOException;
 import java.io.OutputStream;
