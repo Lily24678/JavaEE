@@ -10,10 +10,10 @@
 				margin-bottom: 10px;
 			}
 		</style>
-		
+		<script type="text/javascript" src="../../js/utils.js"></script>
 	</head>
 	<body>
-		<form action="/JavaEE/user?method=login" method="post" id="loginForm" onsubmit="return checkUser()">
+		<form action="/JavaEE/jsp/demo/index.jsp" method="post" id="loginForm" onsubmit="return checkUser()">
 			<div class="form-sub1" id="check-username">
 				<label for="username">用户名：</label>
 				<input type="text" required="required" name="username" value="" id="username" />
@@ -31,7 +31,7 @@
 				<input type="submit" value="提交" />
 			</div>
 		</form>
-		<script type="text/javascript" src="./js/utils.js"></script>
+		
 		<script type="text/javascript">
 			//异步校验用户名是否存在
 			Utils.on(document.getElementById("username"), "blur", function() {

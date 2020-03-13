@@ -10,7 +10,7 @@
 				margin-bottom: 10px;
 			}
 		</style>
-		<script type="text/javascript" src="./js/utils.js"></script>
+		<script type="text/javascript" src="../../js/utils.js"></script>
 	</head>
 	<body>
 		<form action="/JavaEE/jsp/demo/login.jsp" method="post" id="registForm" onsubmit="return checkUserTip();">

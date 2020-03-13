@@ -3,17 +3,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="5;/JavaEE/file.html">
 <title>首页</title>
-<script type="text/javascript" src="./js/utils.js"></script>
 </head>
 <body>
-你好<b id="username"></b>，你已经进入监控阶段，将在5秒后进入登陆页面。<span id="countdown1">5</span>
+<%
+String username="";
+Cookie[] cookies = request.getCookies();
+if(null!=cookies){
+	for(int i = 0;i<cookies.length;i++){
+		if("username".equals(cookies[i].getName())){
+			String[] split = cookies[i].getValue().split("-");
+			username=split[0];
+			break;
+		}
+	}
+}
+%>
+<% 
+response.setHeader("Refresh", "5;/JavaEE/jsp/demo/file.jsp");
+%>
+你好<b id="username"><%= username%></b>，你已经进入监控阶段，将在5秒后进入登陆页面。<span id="countdown1">5</span>
 <script type="text/javascript">
-var username_cookie = Utils.getCookie("username");
-var split = username_cookie.split("-");
-document.getElementById("username").innerHTML=split[0];
-
 //模拟计时器
 var count=4;
 var fn1 = setInterval(function(){
