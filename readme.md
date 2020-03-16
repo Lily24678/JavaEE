@@ -1,5 +1,5 @@
 # JavaWEB三大核心组件
-## Servelet
+## Servlet
 使用步骤：
 - 1、实现Servlet接口。
 - 2、将实现类配置到服务器中。web.xml
@@ -28,7 +28,12 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - TCP
 - UDP
 
-#  数据库
+#  数据库(package:database)
+## JDBC
+
+# JAVA 基础
+## JAVA 的类 package：java.c
+
 
 # Demo案例
 - ServletUtils(cookie)
