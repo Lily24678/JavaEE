@@ -33,6 +33,7 @@ WEB中的监听器共有三类八种(监听三个域对象):
 
 # JAVA 基础
 ## JAVA 的类 package：java.c
+- 1. Properties
 
 
 # Demo案例
