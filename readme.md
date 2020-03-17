@@ -37,16 +37,12 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - tomcat 内置连接连接池（DBCP）的配置使用 JNDI
 - DBCP 
 ```
-   <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-   <dependency>
-       <groupId>commons-dbcp</groupId>
-       <artifactId>commons-dbcp</artifactId>
-   </dependency>
-   <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
-   <dependency>
-       <groupId>commons-pool</groupId>
-       <artifactId>commons-pool</artifactId>
-   </dependency>
+<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+<dependency>
+    <groupId>commons-dbcp</groupId>
+    <artifactId>commons-dbcp</artifactId>
+    <version>1.4</version>
+</dependency>
 ```
 
 # JAVA 基础
@@ -58,11 +54,19 @@ WEB中的监听器共有三类八种(监听三个域对象):
 # Demo案例
 - ServletUtils(cookie)
 - utils.js(纯js代码：)
-1.处理中文乱码（GenericEncodingFilter）
-2、实现自动登录（LoginFilter）
-3、注册、登录，输入用户名和密码后（异步校验）。
-4、实现文件的下载与上传(commons-fileupload-xxx.jar)
-5、实现登录校验
+1. 处理中文乱码（GenericEncodingFilter）
+2. 实现自动登录（LoginFilter）
+3. 注册、登录，输入用户名和密码后（异步校验）。
+4. 实现文件的下载与上传(commons-fileupload-xxx.jar)
+```
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+```
+5. 实现登录校验
 
 #JSP????? vs EL表达式？？？
 - <%@ page session="true"%>:知识点----session与cookie的关系(request.getSession)
