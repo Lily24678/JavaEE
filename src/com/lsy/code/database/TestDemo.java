@@ -11,7 +11,7 @@ public class TestDemo {
 	public void test1() {
 		
 		try {
-			Connection connection = JDBCUtils.getConnection();
+			Connection connection = DBCPUtils.getConnection();
 			String sql = "SELECT * FROM GGJ01_A_WASTE_ENTRY_TIME LIMIT ?,?";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setLong(1, 0);//parameterIndex 从1开始
@@ -20,7 +20,7 @@ public class TestDemo {
 			while (resultSet.next()) {
 				System.out.println(resultSet.getString("ID")+"\t"+resultSet.getString("STATION_ID")+"\t"+resultSet.getString("LICENSE_NO")+"\t"+resultSet.getString("CREATION_TIME")+"\t"+resultSet.getString("READER_ID"));
 			}
-			JDBCUtils.release(connection, statement, resultSet);
+			DBCPUtils.release(connection, statement, resultSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
