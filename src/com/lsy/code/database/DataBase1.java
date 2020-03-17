@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-public class MySQL1 {
+/**
+ * JDBC 的基础开发步骤
+ */
+public class DataBase1 {
 	public static void main(String[] args) throws Exception {
 
 		//1. 	注册驱动。告知JVM使用的是哪一个数据库的驱动

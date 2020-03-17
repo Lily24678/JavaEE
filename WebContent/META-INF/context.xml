@@ -7,4 +7,15 @@
 <Manager className="org.apache.catalina.session.PersistentManager" maxIdleSwap="1">
       <Store className="org.apache.catalina.session.FileStore" directory="javaee"/>
 </Manager>
+<!-- tomcat 内置连接池 配置-->
+  <Resource name="tomcatpool"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="root"
+            password="root"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/jiaotong?serverTimezone=GMT%2B8"
+            initialSize="10" 
+            maxActive="20"
+            maxIdle="4"/>
 </Context>

@@ -29,11 +29,17 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - UDP
 
 #  数据库(package:database)
-## JDBC
+## JDBC规范
+- java.sql.DriverManager;
+
+## 数据库连接池
+- javax.sql.DataSource;
+- tomcat 内置连接连接池（DBCP）的配置使用 JNDI
 
 # JAVA 基础
-## JAVA 的类 package：java.c
+## JAVA 的类
 - 1. Properties
+- 2. Class、ClassLoader
 
 
 # Demo案例

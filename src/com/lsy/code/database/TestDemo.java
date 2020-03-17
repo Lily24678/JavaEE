@@ -20,7 +20,7 @@ public class TestDemo {
 			while (resultSet.next()) {
 				System.out.println(resultSet.getString("ID")+"\t"+resultSet.getString("STATION_ID")+"\t"+resultSet.getString("LICENSE_NO")+"\t"+resultSet.getString("CREATION_TIME")+"\t"+resultSet.getString("READER_ID"));
 			}
-			JDBCUtils.close(connection, statement, resultSet);
+			JDBCUtils.release(connection, statement, resultSet);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -40,7 +40,7 @@ public class JDBCUtils {
 	 * @param statement {@link}java.sql.ResultSet;
 	 * @param resultSet {@link}java.sql.Statement;
 	 */
-	public static void close(Connection connection,Statement statement,ResultSet resultSet) {
+	public static void release(Connection connection,Statement statement,ResultSet resultSet) {
 		if (null!=resultSet) {
 			try {
 				resultSet.close();
@@ -66,6 +66,7 @@ public class JDBCUtils {
 	}
 	
 	/**
+	 * 加载配置文件
 	 * @param fileName
 	 */
 	private static void readConfig(String fileName) {
