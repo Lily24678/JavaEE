@@ -33,9 +33,11 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - java.sql.DriverManager;
 
 ## 数据库连接池
-- javax.sql.DataSource;
-- tomcat 内置连接连接池（DBCP）的配置使用 JNDI
-- DBCP 
+### javax.sql.DataSource;
+
+### tomcat 内置连接连接池（DBCP）的配置使用 JNDI
+
+### DBCP (commons-dbcp-xx.jar,commons-pool-xxx.jar)
 ```
 <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 <dependency>
@@ -44,6 +46,19 @@ WEB中的监听器共有三类八种(监听三个域对象):
     <version>1.4</version>
 </dependency>
 ```
+org.apache.commons.dbcp.BasicDataSourceFactory;
+
+### c3p0：https://www.mchange.com/projects/c3p0/(c3p0-0.9.1.2.jar)
+```
+<!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
+<dependency>
+    <groupId>c3p0</groupId>
+    <artifactId>c3p0</artifactId>
+    <version>0.9.1.2</version>
+</dependency>
+```
+- com.mchange.v2.c3p0.ComboPooledDataSource;
+
 
 # JAVA 基础
 ## JAVA 的类
@@ -57,7 +72,7 @@ WEB中的监听器共有三类八种(监听三个域对象):
 1. 处理中文乱码（GenericEncodingFilter）
 2. 实现自动登录（LoginFilter）
 3. 注册、登录，输入用户名和密码后（异步校验）。
-4. 实现文件的下载与上传(commons-fileupload-xxx.jar)
+4. 实现文件的下载与上传(commons-fileupload-xxx.jar,commons-io-xxx.jar)
 ```
 <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 <dependency>
