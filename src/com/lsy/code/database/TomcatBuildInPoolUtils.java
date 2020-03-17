@@ -9,8 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.mysql.cj.jdbc.exceptions.SQLError;
-
 /**
  * tomcat 内置连接池
  */
