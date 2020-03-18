@@ -3,10 +3,25 @@ package com.lsy.code.database;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 
 public class TestDemo {
+	@Test
+	public void test2() {
+		Date date = new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+		System.out.println(sdf.format(date));
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
+		Date date2 = calendar.getTime();
+		System.out.println(sdf.format(date2));
+
+	}
 	@Test
 	public void test1() {
 		

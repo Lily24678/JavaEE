@@ -31,6 +31,15 @@ WEB中的监听器共有三类八种(监听三个域对象):
 #  数据库(package:database)
 ## JDBC规范
 - java.sql.DriverManager;
+- commons-dbutils-xx.jar
+```
+<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+<dependency>
+    <groupId>commons-dbutils</groupId>
+    <artifactId>commons-dbutils</artifactId>
+    <version>1.7</version>
+</dependency>
+```
 
 ## 数据库连接池
 ### javax.sql.DataSource;
