@@ -27,7 +27,7 @@ public class TestDemo {
 		
 		try {
 			Connection connection = C3P0Utils.getConnection();
-			String sql = "SELECT * FROM GGJ01_A_WASTE_ENTRY_TIME LIMIT ?,?";
+			String sql = "SELECT * FROM STORE LIMIT ?,?";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setLong(1, 0);//parameterIndex 从1开始
 			statement.setLong(2, 1);//parameterIndex 从1开始

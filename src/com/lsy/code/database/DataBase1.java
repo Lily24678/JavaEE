@@ -15,7 +15,7 @@ public class DataBase1 {
 		//2. 	获得连接。使用JDBC中的类,完成对MySQL数据库的连接
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jiaotong?serverTimezone=GMT%2B8", "root", "root");
 		//3.	获得语句执行平台：通过连接对象获取对SQL语句的执行者对象
-		String sql = "SELECT * FROM GGJ01_A_WASTE_ENTRY_TIME LIMIT ?,?";
+		String sql = "SELECT * FROM STORE LIMIT ?,?";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setLong(1, 0);//parameterIndex 从1开始
 		statement.setLong(2, 1);//parameterIndex 从1开始
