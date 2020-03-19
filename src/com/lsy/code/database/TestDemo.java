@@ -1,41 +1,78 @@
 package com.lsy.code.database;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.junit.Test;
+
+import com.lsy.code.demo.domain.User;
 
 public class TestDemo {
 	@Test
 	public void test2() {
-		Date date = new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd 00:00:00");
-		System.out.println(sdf.format(date));
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
-		Date date2 = calendar.getTime();
-		System.out.println(sdf.format(date2));
+		try {
+			//获取连接
+			Connection connection = C3P0Utils.getConnection();
+			String sql_query = "SELECT * FROM USER LIMIT ?,?";
+			QueryRunner runner = new QueryRunner();
+			List<User> list = runner.query(connection, sql_query, new ResultSetHandler<List<User>>() {
 
+				@Override
+				public List<User> handle(ResultSet rs) throws SQLException {
+					List<User> list = new ArrayList<User>();
+					ResultSetMetaData metaData = rs.getMetaData();
+					int count = metaData.getColumnCount();
+					while (rs.next()) {
+						User user = new User();
+						for (int i = 1; i <= count; i++) {
+							setProperty(user,metaData.getColumnLabel(i),rs.getObject(metaData.getColumnLabel(i)));
+						}
+						list.add(user);
+						
+					}
+					return list;
+				}
+
+			}, 0,10);
+			System.out.println(list);
+			
+			//释放资源
+			JDBCUtils.closeQuietly(connection, null, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	private void setProperty(Object bean,String name,Object value) {
+		try {
+			Class<? extends Object> clazz = bean.getClass();
+			Field field = clazz.getDeclaredField(name);
+			field.setAccessible(true);//将private 修改为public
+			field.set(bean, value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void test1() {
+		String sql = "SELECT * FROM USER LIMIT ?,?";
 		
 		try {
-			Connection connection = C3P0Utils.getConnection();
-			String sql = "SELECT * FROM STORE LIMIT ?,?";
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setLong(1, 0);//parameterIndex 从1开始
-			statement.setLong(2, 1);//parameterIndex 从1开始
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				System.out.println(resultSet.getString("ID")+"\t"+resultSet.getString("STATION_ID")+"\t"+resultSet.getString("LICENSE_NO")+"\t"+resultSet.getString("CREATION_TIME")+"\t"+resultSet.getString("READER_ID"));
-			}
-			C3P0Utils.release(connection, statement, resultSet);
+			//获取连接
+			Connection connection = JDBCUtils.getConnection();
+			QueryRunner runner = new QueryRunner();
+			List<User> list = runner.query(connection, sql, new BeanListHandler<User>(User.class) , 0,10);
+			System.out.println(list);
+			//释放资源
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

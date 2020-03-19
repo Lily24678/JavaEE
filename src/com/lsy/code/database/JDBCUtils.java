@@ -40,26 +40,26 @@ public class JDBCUtils {
 	 * @param statement {@link}java.sql.ResultSet;
 	 * @param resultSet {@link}java.sql.Statement;
 	 */
-	public static void release(Connection connection,Statement statement,ResultSet resultSet) {
+	public static void closeQuietly(Connection connection,Statement statement,ResultSet resultSet) {
 		if (null!=resultSet) {
 			try {
 				resultSet.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//quiet
 			}
 		}
 		if (null!=statement) {
 			try {
 				statement.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//quiet
 			}
 		}
 		if (null!=connection) {
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//quiet
 			}
 		}
 		
