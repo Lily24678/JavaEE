@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<!-- 头部 -->
+		<!-- 顶部内容 -->
 		<div class="container-fluid">
 			<!-- 菜单栏 -->
 			<div class="container-fluid">
@@ -74,12 +74,14 @@
 					<div class="col-md-8"
 						style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 						<font size="4">会员注册</font>&nbsp;&nbsp;USER REGISTER
-						<form class="form-horizontal" style="margin-top: 5px;">
+						<form action="/JavaEE/user?method=regist" method="post"
+							id="registForm" onsubmit="return checkUserTip();"
+							class="form-horizontal" style="margin: 15px 0 0 0;">
 							<div class="form-group">
-								<label for="exampleInputText1" class="col-sm-2 control-label">用户名</label>
-								<div class="col-sm-6">
-									<input type="text" name="username" required="required" class="form-control" id="exampleInputText1"
-										placeholder="请输入用户名">
+								<label for="username" class="col-sm-2 control-label">用户名</label>
+								<div class="col-sm-6" id="check-username">
+									<input type="text" name="username" required="required"
+										id="username" class="form-control" placeholder="请输入用户名">
 								</div>
 							</div>
 							<div class="form-group">
@@ -94,8 +96,9 @@
 								<label for="exampleInputPassword2"
 									class="col-sm-2 control-label">确认密码</label>
 								<div class="col-sm-6">
-									<input type="password" name="password" required="required" class="form-control"
-										id="exampleInputPassword2" placeholder="请输入确认密码">
+									<input type="password" name="password" required="required"
+										class="form-control" id="exampleInputPassword2"
+										placeholder="请输入确认密码">
 								</div>
 							</div>
 							<div class="form-group">
@@ -108,29 +111,33 @@
 							<div class="form-group">
 								<label for="exampleInputTel1" class="col-sm-2 control-label">Telephone</label>
 								<div class="col-sm-6">
-									<input type="tel" name="telephone" class="form-control" id="exampleInputTel1"
-										placeholder="Email">
+									<input type="tel" name="telephone" class="form-control"
+										id="exampleInputTel1" placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputText2" class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-6">
-									<input type="text" name="name" class="form-control" id="exampleInputText2"
-										placeholder="请输入姓名">
+									<input type="text" name="name" class="form-control"
+										id="exampleInputText2" placeholder="请输入姓名">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputRadio1" class="col-sm-2 control-label">性别</label>
 								<div class="col-sm-6">
-									<input type="radio" name="sex" value="男" id="exampleInputRadio1" placeholder="男"><label for="exampleInputRadio1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="sex" value="女" id="exampleInputRadio2" placeholder="女"><label for="exampleInputRadio2">女</label>
+									<input type="radio" name="sex" value="男"
+										id="exampleInputRadio1" placeholder="男"><label
+										for="exampleInputRadio1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="sex" value="女"
+										id="exampleInputRadio2" placeholder="女"><label
+										for="exampleInputRadio2">女</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputDate1" class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-6">
-									<input type="date" name="birthday" class="form-control" id="exampleInputDate1"
-										placeholder="年/月/日">
+									<input type="date" name="birthday" class="form-control"
+										id="exampleInputDate1" placeholder="年/月/日">
 								</div>
 							</div>
 							<div class="form-group">
@@ -142,9 +149,13 @@
 									<img alt="校验码无法显示" src="../img/captcha.jhtml">
 								</div>
 							</div>
+							<div id="tip1" style="display: none;">
+								<b style="color: red;">用户名、密码不可为空</b>
+							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<input type="submit" value="注册" style="background: url('../img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
+									<input type="submit" value="注册"
+										style="background: url('../img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 								</div>
 							</div>
 						</form>
@@ -154,7 +165,7 @@
 			</div>
 		</div>
 
-		<!-- 页脚部分 -->
+		<!-- 底部内容 -->
 		<div class="container-fluid">
 			<div class="container-fluid" style="margin-top: 50px;">
 				<img src="../img/footer.jpg" width="100%" height="78" alt="我们的优势"
@@ -180,5 +191,64 @@
 				Copyright &copy; 2005-2016 传智商城 版权所有</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="../js/utils.js"></script>
+	<script type="text/javascript">
+		//异步校验用户名是否存在
+		Utils.on(document.getElementById("username"), "blur", function() {
+			var node = '';
+			if (Utils.strIsBlank(this.value)) {
+				node = document.createTextNode("请输入正确的用户名。");
+				checkNameTip(node);
+			} else {
+				//异步校验
+				Utils.async("post", {
+					username : this.value
+				}, "/JavaEE/user?method=checkNameRegist", function(data) {
+					if (200 != data.code) {
+						node = document.createTextNode(data.msg);
+						checkNameTip(node);
+					}
+				}, true, 'json');
+			}
+
+		});
+
+		//校验是否存在，存在则阻止表单提交
+		function checkUserTip() {
+			var flag = true;
+			var formData = new FormData(document.getElementById("registForm"));
+			Utils.async("post", convert_FormData_to_json(formData),
+					"/JavaEE/user?method=checkNameRegist", function(data) {
+						if (200 != data.code) {
+							flag = false;//阻止表单提交
+							var tip1 = document.getElementById("tip1");
+							tip1.style.display = "";
+							tip1.innerHTML = '<b style="color: red;">'
+									+ data.msg + '</b>';
+							//隐藏提示
+							setTimeout(function() {
+								tip1.style.display = "none";
+							}, 1500);
+						}
+					}, false, 'json');
+			return flag;
+		}
+
+		function checkNameTip(node) {
+			//创建元素，并显示
+			var newSubE = document.createElement("b");
+			newSubE.style = 'color: red;';
+			newSubE.appendChild(node);
+
+			var parentE = document.getElementById("check-username");
+			var exitSubE = document.getElementById("username");
+			parentE.appendChild(newSubE, exitSubE);
+
+			//1s删除新创建的元素
+			setTimeout(function() {
+				parentE.removeChild(newSubE);
+			}, 1500);
+		}
+	</script>
 </body>
 </html>
