@@ -29,7 +29,7 @@ public class DataBase1 {
 			//2. 	获得连接。使用JDBC中的类,完成对MySQL数据库的连接
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/store?serverTimezone=GMT%2B8", "root", "root");
 			//3.	获得语句执行平台：通过连接对象获取对SQL语句的执行者对象
-			String sql = "SELECT * FROM USER LIMIT ?,?";
+			String sql = "SELECT * FROM user LIMIT ?,?";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setLong(1, 0);//parameterIndex 从1开始
 			statement.setLong(2, 1);//parameterIndex 从1开始
@@ -57,7 +57,7 @@ public class DataBase1 {
 		Connection connection = JDBCUtils.getConnection();
 	
 		//操作数据库
-		String sql_query = "SELECT * FROM USER LIMIT ?,?";
+		String sql_query = "SELECT * FROM user LIMIT ?,?";
 		QueryRunner runner = new QueryRunner();
 		try {
 			List<User> list = runner.query(connection, sql_query, new ResultSetHandler<List<User>>() {

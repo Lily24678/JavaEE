@@ -21,7 +21,7 @@ public class TestDemo {
 		try {
 			//获取连接
 			Connection connection = C3P0Utils.getConnection();
-			String sql_query = "SELECT * FROM USER LIMIT ?,?";
+			String sql_query = "SELECT * FROM user LIMIT ?,?";
 			QueryRunner runner = new QueryRunner();
 			List<User> list = runner.query(connection, sql_query, new ResultSetHandler<List<User>>() {
 
@@ -64,7 +64,7 @@ public class TestDemo {
 	
 	@Test
 	public void test1() {
-		String sql = "SELECT * FROM USER LIMIT ?,?";
+		String sql = "SELECT * FROM user LIMIT ?,?";
 		
 		try {
 			//获取连接

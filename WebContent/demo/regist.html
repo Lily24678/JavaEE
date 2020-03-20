@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>注册页面</title>
+<title>注册</title>
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 <script src="../bootstrap/jquery-1.11.3.min.js"></script>
 <script src="../bootstrap/bootstrap.min.js"></script>
@@ -78,7 +78,7 @@
 							<div class="form-group">
 								<label for="exampleInputText1" class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" id="exampleInputText1"
+									<input type="text" name="username" required="required" class="form-control" id="exampleInputText1"
 										placeholder="请输入用户名">
 								</div>
 							</div>
@@ -86,7 +86,7 @@
 								<label for="exampleInputPassword1"
 									class="col-sm-2 control-label">密码</label>
 								<div class="col-sm-6">
-									<input type="password" class="form-control"
+									<input type="password" required="required" class="form-control"
 										id="exampleInputPassword1" placeholder="请输入密码">
 								</div>
 							</div>
@@ -94,49 +94,49 @@
 								<label for="exampleInputPassword2"
 									class="col-sm-2 control-label">确认密码</label>
 								<div class="col-sm-6">
-									<input type="password" class="form-control"
+									<input type="password" name="password" required="required" class="form-control"
 										id="exampleInputPassword2" placeholder="请输入确认密码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1" class="col-sm-2 control-label">Email</label>
 								<div class="col-sm-6">
-									<input type="email" class="form-control"
+									<input type="email" name="email" class="form-control"
 										id="exampleInputEmail1" placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputTel1" class="col-sm-2 control-label">Telephone</label>
 								<div class="col-sm-6">
-									<input type="tel" class="form-control" id="exampleInputTel1"
+									<input type="tel" name="telephone" class="form-control" id="exampleInputTel1"
 										placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputText2" class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" id="exampleInputText2"
+									<input type="text" name="name" class="form-control" id="exampleInputText2"
 										placeholder="请输入姓名">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputRadio1" class="col-sm-2 control-label">性别</label>
 								<div class="col-sm-6">
-									<input type="radio" placeholder="男" value="男">男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" placeholder="女" value="女">女
+									<input type="radio" name="sex" value="男" id="exampleInputRadio1" placeholder="男"><label for="exampleInputRadio1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="sex" value="女" id="exampleInputRadio2" placeholder="女"><label for="exampleInputRadio2">女</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputDate1" class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-6">
-									<input type="date" class="form-control" id="exampleInputDate1"
+									<input type="date" name="birthday" class="form-control" id="exampleInputDate1"
 										placeholder="年/月/日">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleCheck1" class="col-sm-2 control-label">验证码</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control">
+									<input type="text" id="exampleCheck1" class="form-control">
 								</div>
 								<div class="col-sm-2">
 									<img alt="校验码无法显示" src="../img/captcha.jhtml">
