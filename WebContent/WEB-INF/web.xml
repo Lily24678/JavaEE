@@ -125,7 +125,8 @@
   </filter>
   <filter-mapping>
   	<filter-name>GenericEncodingFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>/user/*</url-pattern>
+  	<url-pattern>/file/*</url-pattern>
   </filter-mapping>
   <!-- 自动登录功能 -->
   <filter>
