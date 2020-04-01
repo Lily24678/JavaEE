@@ -33,7 +33,7 @@ public class UserServlet extends BaseServlet {
 		Connection connection = DBCPUtils.getConnection();
 		QueryRunner q = new QueryRunner();
 		String sql = "insert into user(uid,username,password) values(?,?,?)";
-		q.insert(sql, new BeanHandler<User>(User.class),UUID.randomUUID().toString().replaceAll("-", ""), username,password);
+		q.insert(connection,sql, new BeanHandler<User>(User.class),UUID.randomUUID().toString().replaceAll("-", ""), username,password);
 		connection.close();
 		//清空登录信息
 		Cookie cookie = ServletUtils.getCookie("username", request);

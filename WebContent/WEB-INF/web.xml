@@ -29,7 +29,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>default</servlet-name>
-  	<url-pattern>/demo/</url-pattern>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet>
 	  <servlet-name>servlet1</servlet-name><!-- 自定义 -->
@@ -135,7 +135,7 @@
   </filter>
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/demo/file.html</url-pattern>
-  	<url-pattern>/file/*</url-pattern>
+  	<url-pattern>/demo/*</url-pattern>
+  	<url-pattern>/file/**</url-pattern>
   </filter-mapping>
 </web-app>

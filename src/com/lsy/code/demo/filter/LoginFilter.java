@@ -33,8 +33,8 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
-		//req.getRequestDispatcher("/login.html").forward(request, response);;
-		resp.sendRedirect(req.getContextPath()+"/demo/login.html");
+		req.getRequestDispatcher("/demo/login.html").forward(request, response);;
+		//resp.sendRedirect(req.getContextPath()+"/demo/login.html");
 	}
 
 	@Override
