@@ -22,7 +22,7 @@
   </context-param>
   
   <!-- servlet的配置 -->
-  <!-- DefaultServlet配置作用？？？？ -->
+  <!-- DefaultServlet配置作用:DefaultServlet是处理静态资源的入口，可以对目录进行定制化展现，也可以对文件资源进行输出 -->
   <servlet>
   	<servlet-name>default</servlet-name>
   	<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
@@ -137,5 +137,14 @@
   	<filter-name>LoginFilter</filter-name>
   	<url-pattern>/demo/*</url-pattern>
   	<url-pattern>/file/**</url-pattern>
+  </filter-mapping>
+    <!-- 阻止通过Url直接访问服务器上的静态文件 -->
+  <filter>
+  	<filter-name>StaticResourceFilter</filter-name>
+  	<filter-class>com.lsy.code.demo.filter.StaticResourceFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>StaticResourceFilter</filter-name>
+  	<url-pattern>/demo/*</url-pattern>
   </filter-mapping>
 </web-app>

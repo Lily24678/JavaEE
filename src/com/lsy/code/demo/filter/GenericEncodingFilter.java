@@ -11,7 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import com.lsy.code.demo.wrapper.MyGenericEncoding;
-
+/**
+ * 中文乱码处理
+ */
 public class GenericEncodingFilter implements Filter {
 
 	@Override

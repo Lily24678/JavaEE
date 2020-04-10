@@ -95,6 +95,8 @@ org.apache.commons.dbcp.BasicDataSourceFactory;
 </dependency>
 ```
 5. 实现登录校验
+6. 阻止通过Url直接访问服务器上的静态文件
+7. CSRF攻击与防御
 
 #JSP????? vs EL表达式？？？
 - <%@ page session="true"%>:知识点----session与cookie的关系(request.getSession)
@@ -102,4 +104,3 @@ org.apache.commons.dbcp.BasicDataSourceFactory;
 
 #待定
 - JSP?????vs EL表达式？？？
-- DefaultServlet??
