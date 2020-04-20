@@ -1,4 +1,4 @@
-package com.lsy.code.database;
+package com.lsy.code.database.utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class DBCPUtils {
 	static {
 		Properties properties = new Properties();
 		try {
-			properties.load(DBCPUtils.class.getClassLoader().getResourceAsStream("database.properties"));
+			properties.load(DBCPUtils.class.getClassLoader().getResourceAsStream("config/database.properties"));
 			dataSource = BasicDataSourceFactory.createDataSource(properties);
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError(e);

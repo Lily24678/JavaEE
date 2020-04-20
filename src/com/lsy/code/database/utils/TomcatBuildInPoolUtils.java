@@ -1,4 +1,4 @@
-package com.lsy.code.database;
+package com.lsy.code.database.utils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

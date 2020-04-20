@@ -15,6 +15,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.junit.Test;
 
+import com.lsy.code.database.utils.JDBCUtils;
 import com.lsy.code.demo.domain.User;
 /**
  * JDBC 的基础开发步骤。用commons-dbutils-xx.jar操作数据库

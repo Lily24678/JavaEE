@@ -1,4 +1,4 @@
-package com.lsy.code.database;
+package com.lsy.code.database.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ public class JDBCUtils {
 	private static String user;
 	private static String password;
 	static {
-		readConfig("database.properties");
+		readConfig("config/database.properties");
 		try {
 			//1、注册驱动。告知JVM使用的是哪一个数据库的驱动
 			Class.forName(driverName);
