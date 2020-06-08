@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<!-- 底部内容 -->
-		<%@ include file="/JavaEE/jsp/demo/foot.jsp" %>
+		<%@ include file="foot.jsp" %>
 	</div>
 	<script type="text/javascript" src="/JavaEE/js/utils.js"></script>
 	<script type="text/javascript">

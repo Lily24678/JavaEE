@@ -13,7 +13,7 @@
 <body>
 	<div class="container-fluid">
 		<!-- 顶部内容 -->
-		<%@ include file="/JavaEE/jsp/demo/head.jsp" %>
+		<%@ include file="head.jsp" %>
 		
 		<!-- 主体内容 -->
 		<div class="container-fluid">
@@ -240,7 +240,7 @@
 		</div>
 
 		<!-- 底部内容 -->
-		<%@ include file="/JavaEE/jsp/demo/foot.jsp" %>
+		<%@ include file="foot.jsp" %>
 	</div>
 	<script type="text/javascript">
 	var username_cookie = Utils.getCookie("username");
