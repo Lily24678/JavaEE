@@ -13,9 +13,9 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import com.lsy.code.database.utils.DBCPUtils;
 import com.lsy.code.demo.domain.User;
 import com.lsy.code.demo.utils.BaseMessage;
+import com.lsy.code.demo.utils.DBCPUtils;
 import com.lsy.code.demo.utils.MessageHandler;
 import com.lsy.code.demo.utils.ServletUtils;
 import com.lsy.code.demo.utils.StringUtils;

@@ -1,4 +1,4 @@
-package com.lsy.code.database.utils;
+package com.lsy.code.demo.utils;
 
 import java.sql.Connection;
 import java.sql.SQLException;
