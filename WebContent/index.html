@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: '微软雅黑'
+        }
+
+        #container {
+            width: 450px;
+            height: 780px;
+            background: #eee;
+            margin: 80px auto 0;
+            position: relative;
+            box-shadow: 20px 20px 55px #777;
+        }
+
+        .header {
+            background: #000;
+            height: 40px;
+            color: #fff;
+            line-height: 34px;
+            font-size: 20px;
+            padding: 0 10px;
+        }
+
+        .footer {
+            width: 430px;
+            height: 50px;
+            background: #666;
+            position: absolute;
+            bottom: 0;
+            padding: 10px;
+        }
+
+        .footer input {
+            width: 350px;
+            height: 45px;
+            outline: none;
+            font-size: 20px;
+            text-indent: 10px;
+            position: absolute;
+            border-radius: 6px;
+            right: 80px;
+        }
+
+        .footer span {
+            display: inline-block;
+            width: 62px;
+            height: 48px;
+            background: #ccc;
+            font-weight: 900;
+            line-height: 45px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            right: 10px;
+            border-radius: 6px;
+        }
+
+        .footer span:hover {
+            color: #fff;
+            background: #999;
+        }
+
+        #user_face_icon {
+            display: inline-block;
+            background: red;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            position: absolute;
+            bottom: 6px;
+            left: 14px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .content {
+            font-size: 20px;
+            width: 435px;
+            height: 662px;
+            overflow: auto;
+            padding: 5px;
+        }
+
+        .content li {
+            margin-top: 10px;
+            padding-left: 10px;
+            width: 412px;
+            display: block;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .content li img {
+            float: left;
+        }
+
+        .content li span {
+            background: #7cfc00;
+            padding: 10px;
+            border-radius: 10px;
+            float: left;
+            margin: 6px 10px 0 10px;
+            max-width: 310px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 3px #ccc;
+        }
+
+        .content li img.imgleft {
+            float: left;
+        }
+
+        .content li img.imgright {
+            float: right;
+        }
+
+        .content li span.spanleft {
+            float: left;
+            background: #fff;
+        }
+
+        .content li span.spanright {
+            float: right;
+            background: #7cfc00;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <span style="float: left;">聊天界面</span>
+            <span style="float: right;">
+                <script>
+                    var date = new Date();
+                    window.document.write(date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
+                </script>
+            </span>
+        </div>
+        <ul class="content">
+            
+        </ul>
+        <div class="footer">
+            <input id="text" type="text" placeholder="说点什么吧...">
+            <span id="btn">发送</span>
+        </div>
+    </div>
+    <script>
+        var btn = document.getElementById('btn');
+        var content = document.getElementsByClassName('content')[0];
+        var input = document.getElementById('text');
+
+        //建立通信连接
+        var ws = new WebSocket('ws://localhost:8080/JavaEE/chart');
+        //连接建立时触发
+        ws.onopen = function () {
+            console.log('连接建立时触发。。。。。。');
+        };
+
+        //客户端接收服务端数据时触发
+        ws.onmessage = function (event) {
+            console.log('客户端接收服务端数据时触发。。。。。。');
+            console.log('回复的信息是：' + event.data);
+            var message = event.data;
+            var li = document.createElement('li');
+            var span = document.createElement('span');
+            span.className = 'spanright';
+            var text = document.createTextNode(message);
+            span.appendChild(text);
+            li.appendChild(span);
+            content.appendChild(li);
+            //始终保证滚动条在底部
+            content.scrollTop=content.scrollHeight;
+        };
+
+        //通信发生错误时触发
+        ws.onerror = function () {
+            console.log('连接发生错误时触发。。。。。。');
+        };
+
+        //连接关闭时触发
+        ws.onclose = function () {
+            console.log('连接关闭时触发。。。。。。');
+        };
+
+        input.onkeyup = function(event){
+            var keyCode = event.keyCode;
+            if(13==keyCode){
+                sendData();
+            }
+        }
+        btn.onclick = function(){
+            sendData();
+        }
+        function sendData(){
+            var message = input.value;
+            if (message.replace(/\s*/g,"").length != 0) {
+                var li = document.createElement('li');
+                var span = document.createElement('span');
+                span.className = 'spanleft';
+                var text = document.createTextNode(message);
+                span.appendChild(text);
+                li.appendChild(span);
+                content.appendChild(li);
+                //使用连接发送消息
+                ws.send(message);
+            }
+            //始终保证滚动条在底部
+            content.scrollTop=content.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>
