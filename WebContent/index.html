@@ -164,7 +164,9 @@
         var input = document.getElementById('text');
 
         //建立通信连接
-        var ws = new WebSocket('ws://localhost:8080/JavaEE/chart');
+        var href = window.location.href;
+        href.split('?');
+        var ws = new WebSocket('ws://localhost:8080/JavaEE/chart/'+window.location.search.substr(1));
         //连接建立时触发
         ws.onopen = function () {
             console.log('连接建立时触发。。。。。。');
@@ -221,6 +223,7 @@
             //始终保证滚动条在底部
             content.scrollTop=content.scrollHeight;
         }
+        
     </script>
 </body>
 
