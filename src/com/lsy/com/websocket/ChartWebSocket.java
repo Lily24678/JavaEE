@@ -39,7 +39,7 @@ public class ChartWebSocket {
     }
 
     @OnError
-    public voidnError(Session session, Throwable throwable) {
+    public void onError(Session session, Throwable throwable) {
         logger.info("用户id为：{}的连接发送错误");
         throwable.printStackTrace();
     }
