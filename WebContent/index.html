@@ -90,7 +90,7 @@
         .content {
             font-size: 20px;
             width: 435px;
-            height: 662px;
+            height: 540px;
             overflow: auto;
             padding: 5px;
         }
@@ -150,8 +150,13 @@
                 </script>
             </span>
         </div>
+        <div class="header"><span style="width: 50px;float: left;">from:</span><input type="text" name="from"
+                id="from" /></div>
+        <div class="header"><span style="width: 50px;float: left;">to:</span><input type="text" name="to" id="to" />
+        </div>
+        <div class="header"><button id="btn1">建立通信连接</button></div>
         <ul class="content">
-            
+
         </ul>
         <div class="footer">
             <input id="text" type="text" placeholder="说点什么吧...">
@@ -163,53 +168,58 @@
         var content = document.getElementsByClassName('content')[0];
         var input = document.getElementById('text');
 
-        //建立通信连接
-        var href = window.location.href;
-        href.split('?');
-        var ws = new WebSocket('ws://localhost:8080/JavaEE/chart/'+window.location.search.substr(1));
-        //连接建立时触发
-        ws.onopen = function () {
-            console.log('连接建立时触发。。。。。。');
-        };
 
-        //客户端接收服务端数据时触发
-        ws.onmessage = function (event) {
-            console.log('客户端接收服务端数据时触发。。。。。。');
-            console.log('回复的信息是：' + event.data);
-            var message = event.data;
-            var li = document.createElement('li');
-            var span = document.createElement('span');
-            span.className = 'spanright';
-            var text = document.createTextNode(message);
-            span.appendChild(text);
-            li.appendChild(span);
-            content.appendChild(li);
-            //始终保证滚动条在底部
-            content.scrollTop=content.scrollHeight;
-        };
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick = function () {
+            var from = document.getElementById('from').value;
+            var to = document.getElementById('to').value;
 
-        //通信发生错误时触发
-        ws.onerror = function () {
-            console.log('连接发生错误时触发。。。。。。');
-        };
+            //建立通信连接
+            var ws = new WebSocket('ws://localhost:8080/JavaEE/chart/' + from + "-" + to);
 
-        //连接关闭时触发
-        ws.onclose = function () {
-            console.log('连接关闭时触发。。。。。。');
-        };
+            //连接建立时触发
+            ws.onopen = function () {
+                console.log('连接建立时触发。。。。。。');
+            };
 
-        input.onkeyup = function(event){
-            var keyCode = event.keyCode;
-            if(13==keyCode){
+            //客户端接收服务端数据时触发
+            ws.onmessage = function (event) {
+                console.log('客户端接收服务端数据时触发。。。。。。');
+                console.log('回复的信息是：' + event.data);
+                var message = event.data;
+                var li = document.createElement('li');
+                var span = document.createElement('span');
+                span.className = 'spanright';
+                var text = document.createTextNode(message);
+                span.appendChild(text);
+                li.appendChild(span);
+                content.appendChild(li);
+                //始终保证滚动条在底部
+                content.scrollTop = content.scrollHeight;
+            };
+
+            //通信发生错误时触发
+            ws.onerror = function () {
+                console.log('连接发生错误时触发。。。。。。');
+            };
+
+            //连接关闭时触发
+            ws.onclose = function () {
+                console.log('连接关闭时触发。。。。。。');
+            };
+
+            input.onkeyup = function (event) {
+                var keyCode = event.keyCode;
+                if (13 == keyCode) {
+                    sendData();
+                }
+            }
+            btn.onclick = function () {
                 sendData();
             }
-        }
-        btn.onclick = function(){
-            sendData();
-        }
-        function sendData(){
+        function sendData() {
             var message = input.value;
-            if (message.replace(/\s*/g,"").length != 0) {
+            if (message.replace(/\s*/g, "").length != 0) {
                 var li = document.createElement('li');
                 var span = document.createElement('span');
                 span.className = 'spanleft';
@@ -221,9 +231,10 @@
                 ws.send(message);
             }
             //始终保证滚动条在底部
-            content.scrollTop=content.scrollHeight;
+            content.scrollTop = content.scrollHeight;
         }
-        
+        }
+
     </script>
 </body>
 
