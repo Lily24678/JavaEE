@@ -170,30 +170,49 @@
 
 
         var btn1 = document.getElementById('btn1');
+        var connectFlag = false;
         btn1.onclick = function () {
             var from = document.getElementById('from').value;
             var to = document.getElementById('to').value;
-
+            //防止重复建立连接
+            if(connectFlag){
+                alert('连接已建立');
+                return false;
+            }
             //建立通信连接
-            var ws = new WebSocket('ws://localhost:8080/JavaEE/chart/' + from + "-" + to);
+            var ws = new WebSocket('ws://localhost:8080/JavaEE/chat/' + from + "-" + to);
 
             //连接建立时触发
             ws.onopen = function () {
                 console.log('连接建立时触发。。。。。。');
+                connectFlag=true;
             };
 
             //客户端接收服务端数据时触发
             ws.onmessage = function (event) {
                 console.log('客户端接收服务端数据时触发。。。。。。');
                 console.log('回复的信息是：' + event.data);
-                var message = event.data;
-                var li = document.createElement('li');
-                var span = document.createElement('span');
-                span.className = 'spanright';
-                var text = document.createTextNode(message);
-                span.appendChild(text);
-                li.appendChild(span);
-                content.appendChild(li);
+                var message = JSON.parse(event.data)
+                if (typeof message == 'string') {
+                    var li = document.createElement('li');
+                    var span = document.createElement('span');
+                    span.className = 'spanright';
+                    var text = document.createTextNode(message);
+                    span.appendChild(text);
+                    li.appendChild(span);
+                    content.appendChild(li);
+                } else {
+                    for (var i = 0; i < message.length; i++) {
+                        var li = document.createElement('li');
+                        var span = document.createElement('span');
+                        span.className = 'spanright';
+                        var text = document.createTextNode(message[i]);
+                        span.appendChild(text);
+                        li.appendChild(span);
+                        content.appendChild(li);
+                    }
+                }
+
                 //始终保证滚动条在底部
                 content.scrollTop = content.scrollHeight;
             };
@@ -217,22 +236,22 @@
             btn.onclick = function () {
                 sendData();
             }
-        function sendData() {
-            var message = input.value;
-            if (message.replace(/\s*/g, "").length != 0) {
-                var li = document.createElement('li');
-                var span = document.createElement('span');
-                span.className = 'spanleft';
-                var text = document.createTextNode(message);
-                span.appendChild(text);
-                li.appendChild(span);
-                content.appendChild(li);
-                //使用连接发送消息
-                ws.send(message);
+            function sendData() {
+                var message = input.value;
+                if (message.replace(/\s*/g, "").length != 0) {
+                    var li = document.createElement('li');
+                    var span = document.createElement('span');
+                    span.className = 'spanleft';
+                    var text = document.createTextNode(message);
+                    span.appendChild(text);
+                    li.appendChild(span);
+                    content.appendChild(li);
+                    //使用连接发送消息
+                    ws.send(message);
+                }
+                //始终保证滚动条在底部
+                content.scrollTop = content.scrollHeight;
             }
-            //始终保证滚动条在底部
-            content.scrollTop = content.scrollHeight;
-        }
         }
 
     </script>
