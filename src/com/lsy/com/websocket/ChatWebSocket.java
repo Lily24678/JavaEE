@@ -61,7 +61,6 @@ public class ChatWebSocket {
     public void onClose(Session session, CloseReason reason) {
         logger.info("连接：{" + session.getId() + "} 关闭，目前在线人数是" + session.getId() + "");
 
-
     }
 }
 

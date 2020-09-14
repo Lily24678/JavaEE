@@ -14,7 +14,7 @@
     public class MessageVOEncoder implements Encoder.Text<Object>{}
     public class MessageVODecoder implements Decoder.Text<Object>{}
 ```
-2. 在服务端指定编码器和解码器，例：
+2 . 在服务端指定编码器和解码器，例：
 ```
     @ServerEndpoint(value = "/chart/{useId}",encoders = {MessageVOEncoder.class},decoders = {MessageVODecoder.class})
     public class ChartWebSocket {}
