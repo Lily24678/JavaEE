@@ -34,6 +34,10 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - 1. Properties
 - 2. Class、ClassLoader
 
+# 网页布局
+- 1. 表格布局。例：layout_table.html
+- 2. div+css 布局。 例：layout_div+css.html
+- 3. 框架布局（frame，分frameset 和iframe）
 
 # Demo案例
 - ServletUtils(cookie)
