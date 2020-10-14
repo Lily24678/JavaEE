@@ -86,8 +86,9 @@
             </div>
         </div>
         <div class="clear"></div>
+        <!-- 轮播图 -->
         <div class="div3">
-            <img style="height: 800px;width: 100%;" src="./img/1.jpg" alt="不支持查看" />
+            <img id="slideshow" style="height: 800px;width: 100%;" src="./img/1.jpg" alt="不支持查看" />
         </div>
         <div class="div4">
             <span>热门商品</span><img src="./img/title2.jpg" alt="不支持查看" />
@@ -139,6 +140,16 @@
         </div>
         <div class="div11" style="text-align: center;">Copyright @ 2005-2020 传智播客黑马集团所有</div>
     </div>
+    
+    <script>
+        // JS完成图片的轮播图
+        var index=1;
+        setInterval(() => {
+            if(3<index)index=1;
+            document.getElementById("slideshow").src='./img/'+index+'.jpg';
+            index++;
+        }, 1500);
+    </script>
 </body>
 
 </html>

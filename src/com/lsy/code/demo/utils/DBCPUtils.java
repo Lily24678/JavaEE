@@ -16,7 +16,7 @@ public class DBCPUtils {
 	static {
 		Properties properties = new Properties();
 		try {
-			properties.load(DBCPUtils.class.getClassLoader().getResourceAsStream("config/database.properties"));
+			properties.load(DBCPUtils.class.getClassLoader().getResourceAsStream("database.properties"));
 			dataSource = BasicDataSourceFactory.createDataSource(properties);
 		} catch (Exception e) {
 			throw new ExceptionInInitializerError(e);

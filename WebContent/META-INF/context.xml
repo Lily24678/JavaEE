@@ -12,7 +12,7 @@
             auth="Container"
             type="javax.sql.DataSource"
             username="root"
-            password="root"
+            password="root1234"
             driverClassName="com.mysql.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/store?serverTimezone=GMT%2B8"
             initialSize="10" 
