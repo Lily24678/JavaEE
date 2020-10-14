@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+    <script src="./js/jquery-1.11.3.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <style>
+        .div1 div {
+            height: 57px;
+        }
+
+        .div2 a:link {
+            color: white;
+        }
+
+        .div1 a,
+        .div2 a,
+        .div10 a {
+            margin-right: 20px;
+        }
+
+        .div2 div {
+            height: 64px;
+            /*设置为弹性容器*/
+            display: flex;
+            /*定义div的元素垂直居中*/
+            align-items: center;
+        }
+
+        .div5>div>div>div,
+        .div8>div>div>div {
+            height: 236px;
+        }
+
+        /* 图片自适应div */
+        .cover {
+            /* object-fit: cover; */
+            width: 100%;
+            height: 100%;
+        }
+
+        /* div中元素垂直水平居中 */
+        .div5>div>div>div,
+        .div8>div>div>div,
+        .div10 div,
+        .div11 div {
+            /*设置为弹性容器*/
+            display: flex;
+            /*定义div的元素垂直居中*/
+            align-items: center;
+            /*定义div的里的元素水平居中*/
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* 列转行显示 */
+        ul>li {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row div1">
+                <div class="col-md-3"><img src="./img/logo2.png" alt="不支持查看" /></div>
+                <div class="col-md-6"><img src="./img/header.png" alt="不支持查看" /></div>
+                <div class="col-md-3" style="display: flex;align-items: center;">
+                    <a href="javascript:void(0);">登录</a>
+                    <a href="javascript:void(0);">注册</a>
+                    <a href="javascript:void(0);">购物车</a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row div2" style="background-color: black;">
+                    <div class="col-md-9">
+                        <ul>
+                            <li><a href="javascript:void(0);">首页</a></li>
+                            <li><a href="javascript:void(0);">手机数码</a></li>
+                            <li><a href="javascript:void(0);">电脑办公</a></li>
+                            <li><a href="javascript:void(0);">电脑办公</a></li>
+                            <li><a href="javascript:void(0);">电脑办公</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3"><input style="margin: 0 20px 0 0;" type="text" /><button>subumit</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 轮播图 -->
+        <div class="container-fluid">
+            <div class="row div3">
+                <div class="col-md-12">
+                    <img id="slideshow" style="height: 800px;width: 100%;" src="./img/1.jpg" alt="不支持查看" />
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 40px;">
+            <div class="row div4">
+                <div class="col-md-12">
+                    <span style="font-weight: 800;font-size: 50px;">热门商品</span><img src="./img/title2.jpg" alt="不支持查看" />
+                </div>
+            </div>
+            <div class="row div5">
+                <div class="col-md-2" style="height: 472px;">
+                    <img class="cover" src="./img/products/big01.jpg" alt="不支持查看" />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="cover" src="./img/products/middle01.jpg" alt="不支持查看" />
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small01.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small02.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small03.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small04.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small05.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small06.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small07.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small08.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small09.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row div6">
+                <div class="col-md-12" style="height: 125px;">
+                    <img class="cover" src="./img/ad.jpg" alt="不支持查看" />
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid"  style="margin-top: 40px;">
+            <div class="row div7">
+                <div class="col-md-12">
+                    <span style="font-weight: 800;font-size: 50px;">热门商品</span><img src="./img/title2.jpg" alt="不支持查看" />
+                </div>
+            </div>
+            <div class="row div8">
+                <div class="col-md-2" style="height: 472px;">
+                    <img class="cover" src="./img/products/big01.jpg" alt="不支持查看" />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img class="cover" src="./img/products/middle01.jpg" alt="不支持查看" />
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small01.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small02.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small03.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small04.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small05.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small06.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small07.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small08.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div>
+                                <img src="./img/products/small09.jpg" alt="不支持查看" />
+                                <p>商品名词</p>
+                                <p>价格：￥xx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row div9">
+                <div class="col-md-12" style="height: 78px;">
+                    <img class="cover" src="./img/footer.jpg" alt="不支持查看" />
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row div10">
+                <div class="col-md-12">
+                    <ul>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                        <li><a href="javascript:void(0);">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row div11">
+                <div class="col-md-12">
+                    Copyright @ 2005-2020 传智播客黑马集团所有
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
