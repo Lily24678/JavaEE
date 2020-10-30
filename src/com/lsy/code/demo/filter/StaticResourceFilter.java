@@ -1,6 +1,7 @@
 package com.lsy.code.demo.filter;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * 阻止通过Url直接访问服务器上的静态文件
  */
 public class StaticResourceFilter implements Filter {
+	private static Logger logger = Logger.getLogger("com.lsy.code.demo.filter.StaticResourceFilter");
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
