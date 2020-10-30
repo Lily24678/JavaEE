@@ -1,32 +1,23 @@
 package com.lsy.code.demo.servlet;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.lsy.code.demo.utils.BaseMessage;
+import com.lsy.code.demo.utils.MessageHandler;
+import com.lsy.code.servlet.BaseServlet;
+import net.sf.json.JSONObject;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
-import org.apache.tomcat.util.codec.binary.Base64;
 
-import com.lsy.code.demo.utils.BaseMessage;
-import com.lsy.code.demo.utils.MessageHandler;
-import com.lsy.code.servlet.BaseServlet;
-
-import net.sf.json.JSONObject;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class FileServlet extends BaseServlet {
@@ -136,9 +127,8 @@ public class FileServlet extends BaseServlet {
 	}
 
 	public static String base64EncodeFileName(String fileName) {
-		Base64 base64Encoder = new Base64();
 		try {
-			return "=?UTF-8?B?" + new String(base64Encoder.encode(fileName.getBytes("UTF-8"))) + "?=";
+			return "=?UTF-8?B?" + Base64.getEncoder().encodeToString(fileName.getBytes("UTF-8")) + "?=";
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
