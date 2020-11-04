@@ -28,6 +28,7 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		logger.info("过滤器LoginFilter功能---阻止未登录用户查看资源");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		Cookie cookie = ServletUtils.getCookie("username", request);
@@ -35,8 +36,8 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
-		req.getRequestDispatcher("/demo/login.html").forward(request, response);;
-		//resp.sendRedirect(req.getContextPath()+"/demo/login.html");
+		req.getRequestDispatcher("/demo/login.html").forward(request, response);
+//		resp.sendRedirect(req.getContextPath()+"/demo/login.html");
 	}
 
 	@Override

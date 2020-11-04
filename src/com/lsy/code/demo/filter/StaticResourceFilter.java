@@ -19,14 +19,17 @@ public class StaticResourceFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		logger.info("Filter实例 创建 ：服务器启动时创建。---StaticResourceFilter");
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		logger.info("过滤器StaticResourceFilter功能---防止盗链；阻止通过Url直接访问服务器上的静态文件。");
 		HttpServletRequest req = (HttpServletRequest) request;
 		// 从 HTTP 头中取得 Referer 值
 		String referer = req.getHeader("Referer");
+		System.out.println(referer);
 		if (req.getRequestURL().toString().endsWith("JavaEE/")) {
 			chain.doFilter(request, response);
 		} else if (referer != null) {
@@ -38,6 +41,7 @@ public class StaticResourceFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		logger.info("Filter实例 销毁：服务器关闭时销毁。---StaticResourceFilter");
 	}
 
 }

@@ -26,18 +26,6 @@ import net.sf.json.JSONObject;
 @SuppressWarnings("serial")
 public class UserServlet extends BaseServlet {
 
-	public String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		return "/demo/login.html";
-	}
-
-	public String index(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		return "/demo/index.html";
-	}
-	
-	public String regist(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		return "/demo/regist.html";
-	}
-	
 	/**
 	 * 注册校验
 	 * @param request
@@ -111,30 +99,6 @@ public class UserServlet extends BaseServlet {
 		response.getWriter().print(jsonObject.toString());
 	}
 
-	/**
-	 * 登录用户名校验
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws IOException
-	 * @throws SQLException 
-	 */
-	public void checkNameLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		String username = request.getParameter("username");
-		BaseMessage<?> massage = MessageHandler.createMsgSuccess("用户名正确");
-		
-		Connection connection = DBCPUtils.getConnection();
-		String sql = "SELECT username FROM user WHERE username=?";
-		QueryRunner q = new QueryRunner();
-		String qname = q.query(connection, sql, new ScalarHandler<String>(), username);
-		connection.close();
-		
-		if (StringUtils.isBlank(qname))
-			massage = MessageHandler.createMsgFailure("用户名不正确");
-		// 转换成JSON字符串
-		JSONObject jsonObject = JSONObject.fromObject(massage);
-		response.getWriter().print(jsonObject.toString());
-	}
 
 	/**
 	 * 注册用户名校验
