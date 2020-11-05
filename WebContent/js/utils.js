@@ -1,12 +1,22 @@
 var Utils = {
-
-	//通用的事件添加方法
+	/**
+	 * 通用的事件添加方法
+	 * @param elm 元素
+	 * @param type 事件名
+	 * @param handler 回调函数
+	 * @returns {*}
+	 */
+	//
 	on: function(elm, type, handler) {
 		// 添加事件
 		return elm.attachEvent ? elm.attachEvent("on" + type, handler) : elm.addEventListener(type, handler, false);
 	},
 
-	//校验字符串是否为空
+	/**
+	 * 校验字符串是否为空
+	 * @param str 被校验字符串
+	 * @returns {boolean}
+	 */
 	strIsBlank: function(str) {
 		if (typeof str === "string") {
 			if (str.trim() == "") return true;
@@ -17,6 +27,7 @@ var Utils = {
 	},
 
 	/**
+	 * 发送请求
 	 * @param method:方法名get、post
 	 * @param params:参数FormData,json对象
 	 * @param url：访问地址
@@ -62,6 +73,12 @@ var Utils = {
 		}
 	},
 
+	/**
+	 * 设置cookie
+	 * @param cname cookie名
+	 * @param cvalue cookie值
+	 * @param exdays cookie存在多少天
+	 */
 	setCookie: function(cname, cvalue, exdays) {
 		var d = new Date();
 		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -69,6 +86,11 @@ var Utils = {
 		document.cookie = cname + "=" + cvalue + "; " + expires;
 	},
 
+	/**
+	 * 通过cookie名获取cookie值
+	 * @param cname cookie名
+	 * @returns {string}
+	 */
 	getCookie: function(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');

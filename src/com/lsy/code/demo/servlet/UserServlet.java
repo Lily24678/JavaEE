@@ -22,7 +22,7 @@ import com.lsy.code.demo.utils.StringUtils;
 import com.lsy.code.servlet.BaseServlet;
 
 import net.sf.json.JSONObject;
-
+/**用户 */
 @SuppressWarnings("serial")
 public class UserServlet extends BaseServlet {
 
@@ -40,7 +40,7 @@ public class UserServlet extends BaseServlet {
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("注册成功");
 		
 		Connection connection = DBCPUtils.getConnection();
-		String sql = "SELECT * FROM user WHERE username=?";
+		String sql = "SELECT uid FROM user WHERE username=?";
 		QueryRunner q = new QueryRunner();
 		String qname = q.query(connection, sql, new ScalarHandler<String>(), username);
 		connection.close();
@@ -83,9 +83,7 @@ public class UserServlet extends BaseServlet {
 		connection.close();
 		
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
-		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-			massage = MessageHandler.createMsgFailure("用户名、登录密码不可为空");
-		}else if (null==user) { 
+		if (null==user) {
 			massage = MessageHandler.createMsgFailure("用户名或者登录密码错误"); 
 		} else {
 			ServletUtils.addCookie("username", username, request,response);
@@ -98,31 +96,4 @@ public class UserServlet extends BaseServlet {
 		JSONObject jsonObject = JSONObject.fromObject(massage);
 		response.getWriter().print(jsonObject.toString());
 	}
-
-
-	/**
-	 * 注册用户名校验
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws IOException
-	 * @throws SQLException 
-	 */
-	public void checkNameRegist(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		String username = request.getParameter("username");
-		BaseMessage<?> massage = MessageHandler.createMsgSuccess("用户名正确");
-		
-		Connection connection = DBCPUtils.getConnection();
-		String sql = "SELECT username FROM user WHERE username=?";
-		QueryRunner q = new QueryRunner();
-		String qname = q.query(connection, sql, new ScalarHandler<String>(), username);
-		connection.close();
-		
-		if (StringUtils.isNotBlank(qname))
-			massage = MessageHandler.createMsgFailure("用户名已经存在");
-		// 转换成JSON字符串
-		JSONObject jsonObject = JSONObject.fromObject(massage);
-		response.getWriter().print(jsonObject.toString());
-	}
-
 }

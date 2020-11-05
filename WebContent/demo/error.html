@@ -2,9 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Refresh" content="5;/JavaEE"/>
 <title>错误提示</title>
 </head>
 <body>
-<h1>你访问资源的不存在</h1>
+<h1 style="color: red;">你访问资源的不存在!!!请联系管理员！！！<span id="seconds">5</span>秒钟后将跳转到该网站的首页。</h1>
+<script>
+    let s = 5;
+    //5秒后跳转到首页
+    window.setInterval(function(){
+        s--;
+        document.getElementById("seconds").innerHTML=s;
+        if(s<=0)window.clearInterval();
+    },1000);
+</script>
 </body>
 </html>

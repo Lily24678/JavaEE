@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>注册</title>
-<link rel="stylesheet" href="/JavaEE/bootstrap/css/bootstrap.min.css">
-<script src="/JavaEE/bootstrap/jquery-1.11.3.min.js"></script>
-<script src="/JavaEE/bootstrap/bootstrap.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>注册</title>
+	<link rel="stylesheet" href="/JavaEE/bootstrap/css/bootstrap.min.css">
+	<script src="/JavaEE/bootstrap/jquery-1.11.3.min.js"></script>
+	<script src="/JavaEE/bootstrap/bootstrap.min.js"></script>
 </head>
+
 <body>
 	<div class="container-fluid">
 		<!-- 顶部内容 -->
@@ -23,7 +25,7 @@
 					</div>
 					<div class="col-md-3" style="padding-top: 20px">
 						<ol class="list-inline">
-							<li><a href="login.html">登录</a></li>
+							<li><a href="/JavaEE/demo/login.html">登录</a></li>
 							<li><a href="">购物车</a></li>
 							<li><a href="">我的订单</a></li>
 							<li><a href="">退出登陆</a></li>
@@ -37,20 +39,16 @@
 					<div class="container-fluid">
 						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed"
-								data-toggle="collapse"
-								data-target="#bs-example-navbar-collapse-1"
-								aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span> <span
-									class="icon-bar"></span> <span class="icon-bar"></span> <span
-									class="icon-bar"></span>
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span>
 							</button>
 							<a class="navbar-brand" href="index.html">首页</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse"
-							id="bs-example-navbar-collapse-1">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<form class="navbar-form navbar-right" role="search">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="Search">
@@ -67,77 +65,71 @@
 
 		<!-- 主体内容 -->
 		<div class="container-fluid">
-			<div class="container-fluid"
-				style="width: 97.8%; background: url('/JavaEE/img/regist_bg.jpg');">
+			<div class="container-fluid" style="width: 97.8%; background: url('/JavaEE/img/regist_bg.jpg');">
 				<div class="row">
 					<div class="col-md-2"></div>
 					<div class="col-md-8"
 						style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
-						<font size="4">会员注册</font>&nbsp;&nbsp;USER REGISTER
-						<form action="/JavaEE/user?method=login" method="post"
-							id="registForm" onsubmit="return checkUserTip();"
-							class="form-horizontal" style="margin: 15px 0 0 0;">
+						<span size="4">会员注册</span>&nbsp;&nbsp;USER REGISTER
+						<form action="/JavaEE/page?method=login" method="post" id="registForm" class="form-horizontal"
+							style="margin: 15px 0 0 0;">
 							<div class="form-group">
 								<label for="username" class="col-sm-2 control-label">用户名</label>
-								<div class="col-sm-6" id="check-username">
-									<input type="text" name="username" required="required"
-										id="username" class="form-control" placeholder="请输入用户名">
+								<div class="col-sm-6">
+									<input type="text" name="username" required="required" id="username"
+										class="form-control" placeholder="请输入用户名">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword1"
-									class="col-sm-2 control-label">密码</label>
+								<label for="exampleInputPassword1" class="col-sm-2 control-label">密码</label>
 								<div class="col-sm-6">
 									<input type="password" name="repassword" required="required" class="form-control"
 										id="exampleInputPassword1" placeholder="请输入密码">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword2"
-									class="col-sm-2 control-label">确认密码</label>
+								<label for="exampleInputPassword2" class="col-sm-2 control-label">确认密码</label>
 								<div class="col-sm-6">
-									<input type="password" name="password" required="required"
-										class="form-control" id="exampleInputPassword2"
-										placeholder="请输入确认密码">
+									<input type="password" name="password" required="required" class="form-control"
+										id="exampleInputPassword2" placeholder="请输入确认密码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1" class="col-sm-2 control-label">Email</label>
 								<div class="col-sm-6">
-									<input type="email" name="email" class="form-control"
-										id="exampleInputEmail1" placeholder="Email">
+									<input type="email" name="email" class="form-control" id="exampleInputEmail1"
+										placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputTel1" class="col-sm-2 control-label">Telephone</label>
 								<div class="col-sm-6">
-									<input type="tel" name="telephone" class="form-control"
-										id="exampleInputTel1" placeholder="Email">
+									<input type="tel" name="telephone" class="form-control" id="exampleInputTel1"
+										placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputText2" class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-6">
-									<input type="text" name="name" class="form-control"
-										id="exampleInputText2" placeholder="请输入姓名">
+									<input type="text" name="name" class="form-control" id="exampleInputText2"
+										placeholder="请输入姓名">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputRadio1" class="col-sm-2 control-label">性别</label>
 								<div class="col-sm-6">
-									<input type="radio" name="sex" value="男"
-										id="exampleInputRadio1" placeholder="男"><label
+									<input type="radio" name="sex" value="男" id="exampleInputRadio1"
+										placeholder="男"><label
 										for="exampleInputRadio1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<input type="radio" name="sex" value="女"
-										id="exampleInputRadio2" placeholder="女"><label
-										for="exampleInputRadio2">女</label>
+									<input type="radio" name="sex" value="女" id="exampleInputRadio2"
+										placeholder="女"><label for="exampleInputRadio2">女</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputDate1" class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-6">
-									<input type="date" name="birthday" class="form-control"
-										id="exampleInputDate1" placeholder="年/月/日">
+									<input type="date" name="birthday" class="form-control" id="exampleInputDate1"
+										placeholder="年/月/日">
 								</div>
 							</div>
 							<div class="form-group">
@@ -150,9 +142,6 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div id="tip1" style="display: none;">
-									<b style="color: red;">用户名、密码不可为空</b>
-								</div>							
 								<div class="col-sm-offset-2 col-sm-10">
 									<input type="submit" value="注册"
 										style="background: url('/JavaEE/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
@@ -168,12 +157,10 @@
 		<!-- 底部内容 -->
 		<div class="container-fluid">
 			<div class="container-fluid" style="margin-top: 50px;">
-				<img src="/JavaEE/img/footer.jpg" width="100%" height="78" alt="我们的优势"
-					title="我们的优势" />
+				<img src="/JavaEE/img/footer.jpg" width="100%" height="78" alt="我们的优势" title="我们的优势" />
 			</div>
 
-			<div class="container-fluid"
-				style="text-align: center; margin-top: 5px;">
+			<div class="container-fluid" style="text-align: center; margin-top: 5px;">
 				<ul class="list-inline">
 					<li><a href="info.html">关于我们</a></li>
 					<li><a>联系我们</a></li>
@@ -186,73 +173,72 @@
 					<li><a>广告声明</a></li>
 				</ul>
 			</div>
-			<div
-				style="text-align: center; margin-top: 5px; margin-bottom: 20px;">
+			<div style="text-align: center; margin-top: 5px; margin-bottom: 20px;">
 				Copyright &copy; 2005-2016 传智商城 版权所有</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="/JavaEE/js/utils.js"></script>
 	<script type="text/javascript">
-		//异步校验用户名是否存在
-		Utils.on(document.getElementById("username"), "blur", function() {
-			var node = '';
+		/**
+		* 校验输入内容是否为空
+		*/
+		//校验用户名是否为空
+		Utils.on(document.getElementById("username"), "blur", function () {
 			if (Utils.strIsBlank(this.value)) {
-				node = document.createTextNode("请输入正确的用户名。");
-				checkNameTip(node);
-			} else {
-				//异步校验
-				Utils.async("post", {
-					username : this.value
-				}, "/JavaEE/user?method=checkNameRegist", function(data) {
-					if (200 != data.code) {
-						node = document.createTextNode(data.msg);
-						checkNameTip(node);
-					}
-				}, true, 'json');
+				const node = document.createTextNode("请输入正确的用户名。");
+				showTip(this, node);
 			}
-
+		});
+		//校验密码是否为空
+		Utils.on(document.getElementById("exampleInputPassword1"), "blur", function () {
+			if (Utils.strIsBlank(this.value)) {
+				const node = document.createTextNode("请输入正确的密码。");
+				showTip(this, node);
+			}
+		});
+		//校验确认密码和密码是否一致
+		Utils.on(document.getElementById("exampleInputPassword2"), "blur", function () {
+			const exampleInputPassword1Value = document.getElementById("exampleInputPassword1").value;
+			if (Utils.strIsBlank(this.value) && this.value != exampleInputPassword1Value) {
+				var node = document.createTextNode("请保持确认秘密与密码一致。");
+				showTip(this, node);
+			}
 		});
 
-		//校验是否存在，存在则阻止表单提交
-		function checkUserTip() {
-			var flag = true;
-			var formData = new FormData(document.getElementById("registForm"));
-			if(formData.get("password")!==formData.get("repassword")){
-				flag=false;
-				alert("密码和确认密码需一致");
-			}
+		/**
+		* 表单异步校验
+		*/
+		Utils.on(document.getElementById("registForm"), "submit", function (event) {
+
+			const formData = new FormData(document.getElementById("registForm"));
 			Utils.async("post", convert_FormData_to_json(formData),
-					"/JavaEE/user?method=checkUserRegist", function(data) {
-						if (200 != data.code) {
-							flag = false;//阻止表单提交
-							var tip1 = document.getElementById("tip1");
-							tip1.style.display = "";
-							tip1.innerHTML = '<b style="color: red;">'
-									+ data.msg + '</b>';
-							//隐藏提示
-							setTimeout(function() {
-								tip1.style.display = "none";
-							}, 1500);
-						}
-					}, false, 'json');
-			return flag;
-		}
+				"/JavaEE/user?method=checkUserRegist", function (data) {
+					if (200 != data.code) {
+						//取消事件的默认动作 event.preventDefault();
+						event.returnValue = false;
+						const node = document.createTextNode(data.msg);
+						showTip(document.getElementById("registForm"), node);
+					}
+				}, false, 'json');
+		});
 
-		function checkNameTip(node) {
-			//创建元素，并显示
-			var newSubE = document.createElement("b");
-			newSubE.style = 'color: red;';
-			newSubE.appendChild(node);
 
-			var parentE = document.getElementById("check-username");
-			var exitSubE = document.getElementById("username");
-			parentE.appendChild(newSubE, exitSubE);
+		function showTip(el, textNode) {
+			//创建元素
+			const newSubE = document.createElement("b");
+			newSubE.setAttribute("style","color: red;");
+			//添加子元素
+			newSubE.appendChild(textNode);
+
+			el.parentNode.appendChild(newSubE);
 
 			//1s删除新创建的元素
-			setTimeout(function() {
-				parentE.removeChild(newSubE);
+			setTimeout(function () {
+				el.parentNode.removeChild(newSubE);
 			}, 1500);
+
 		}
 	</script>
 </body>
+
 </html>

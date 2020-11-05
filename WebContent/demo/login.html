@@ -24,8 +24,8 @@
 					</div>
 					<div class="col-md-3" style="padding-top: 20px">
 						<ol class="list-inline">
-							<li><a href="/JavaEE/user?method=regist">注册</a></li>
-							<li><a href="/JavaEE/user?method=login">登录</a></li>
+							<li><a href="/JavaEE/demo/regist.html">注册</a></li>
+							<li><a href="/JavaEE/demo/login.html">登录</a></li>
 							<li><a href="">购物车</a></li>
 							<li><a href="temp.html">我的订单</a></li>
 							<li><a href="">退出登陆</a></li>
@@ -75,12 +75,12 @@
 					<div class="col-md-7"></div>
 					<div class="col-md-4"
 						style="background: #fff; padding: 40px 40px; margin: 100px 0rem; border: 7px solid #ccc;">
-						<font size="4">会员登录</font>&nbsp;&nbsp;USER LOGIN<font size="4" style="float: right;"><a
-								href="/JavaEE/user?method=regist">注册</a></font>
+						<span size="4">会员登录</span>&nbsp;&nbsp;USER LOGIN<span size="4" style="float: right;"><a
+								href="/JavaEE/user?method=regist">注册</a></span>
 						<form action="/JavaEE" method="post" id="loginForm" class="form-horizontal" style="margin: 15px 0 0 0;">
 							<div class="form-group">
 								<label for="username" class="col-sm-2 control-label">用户名</label>
-								<div class="col-sm-9" id="check-username">
+								<div class="col-sm-9">
 									<input type="text" name="username" required="required" id="username"
 										class="form-control" placeholder="请输入用户名">
 								</div>
@@ -154,14 +154,14 @@
 		//校验用户名是否为空
 		Utils.on(document.getElementById("username"), "blur", function () {		
 			if (Utils.strIsBlank(this.value)) {
-				var node = document.createTextNode("请输入正确的用户名。");
+				const node = document.createTextNode("请输入正确的用户名。");
 				showTip(this, node);
 			}
 		});
 		//校验密码是否为空
 		Utils.on(document.getElementById("exampleInputPassword2"), "blur", function () {
 			if (Utils.strIsBlank(this.value)) {
-				var node = document.createTextNode("请输入正确的密码。");
+				const node = document.createTextNode("请输入正确的密码。");
 				showTip(this, node);
 			}
 		});
@@ -170,40 +170,23 @@
 		 * 表单异步校验
 		*/
 		Utils.on(document.getElementById("loginForm"), "submit", function (event) {
-
 			var formData = new FormData(this);
-			var data = JSON.stringify(formData);
 			//异步校验
 			Utils.async("post", convert_FormData_to_json(formData), "/JavaEE/user?method=checkUserLogin", function (data) {
 				if (200 != data.code) {
 					//取消事件的默认动作 event.preventDefault();
 					event.returnValue=false;
-					window.alert(data.msg);
+					const node = document.createTextNode(data.msg);
+					showTip(document.getElementById("loginForm"), node);
 				}
 			}, false, 'json');
 		});
 		
 
-
-
-		function checkUser() {
-			var flag = true;
-			var formData = new FormData(document.getElementById("loginForm"));
-			var data = JSON.stringify(formData);
-			//异步校验
-			Utils.async("post", convert_FormData_to_json(formData), "/JavaEE/user?method=checkUserLogin", function (data) {
-				if (200 != data.code) {
-					flag = false;
-					window.alert(data.msg);
-				}
-			}, false, 'json');
-			return flag;
-		}
-
 		function showTip(el, textNode) {
 			//创建元素
-			var newSubE = document.createElement("b");
-			newSubE.style = 'color: red;';
+			const newSubE = document.createElement("b");
+			newSubE.setAttribute("style","color: red;");
 			//添加子元素
 			newSubE.appendChild(textNode);
 
