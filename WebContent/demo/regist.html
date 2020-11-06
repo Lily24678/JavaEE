@@ -76,49 +76,49 @@
 							<div class="form-group">
 								<label for="username" class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-6">
-									<input type="text" name="username" required="required" id="username"
-										class="form-control" placeholder="请输入用户名">
+									<input type="text" form="registForm" name="username" required="required"
+										id="username" class="form-control" placeholder="请输入用户名">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1" class="col-sm-2 control-label">密码</label>
 								<div class="col-sm-6">
-									<input type="password" name="repassword" required="required" class="form-control"
-										id="exampleInputPassword1" placeholder="请输入密码">
+									<input type="password" form="registForm" name="repassword" required="required"
+										class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword2" class="col-sm-2 control-label">确认密码</label>
 								<div class="col-sm-6">
-									<input type="password" name="password" required="required" class="form-control"
-										id="exampleInputPassword2" placeholder="请输入确认密码">
+									<input type="password" form="registForm" name="password" required="required"
+										class="form-control" id="exampleInputPassword2" placeholder="请输入确认密码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1" class="col-sm-2 control-label">Email</label>
 								<div class="col-sm-6">
-									<input type="email" name="email" class="form-control" id="exampleInputEmail1"
-										placeholder="Email">
+									<input type="email" form="registForm" name="email" class="form-control"
+										id="exampleInputEmail1" placeholder="Email">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputTel1" class="col-sm-2 control-label">Telephone</label>
 								<div class="col-sm-6">
-									<input type="tel" name="telephone" class="form-control" id="exampleInputTel1"
-										placeholder="Email">
+									<input type="tel" form="registForm" name="telephone" class="form-control"
+										id="exampleInputTel1" placeholder="请输入电话号码">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputText2" class="col-sm-2 control-label">姓名</label>
 								<div class="col-sm-6">
-									<input type="text" name="name" class="form-control" id="exampleInputText2"
-										placeholder="请输入姓名">
+									<input type="text" form="registForm" name="name" class="form-control"
+										id="exampleInputText2" placeholder="请输入姓名">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputRadio1" class="col-sm-2 control-label">性别</label>
 								<div class="col-sm-6">
-									<input type="radio" name="sex" value="男" id="exampleInputRadio1"
+									<input type="radio" form="registForm" name="sex" value="男" id="exampleInputRadio1"
 										placeholder="男"><label
 										for="exampleInputRadio1">男</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="radio" name="sex" value="女" id="exampleInputRadio2"
@@ -128,8 +128,8 @@
 							<div class="form-group">
 								<label for="exampleInputDate1" class="col-sm-2 control-label">出生日期</label>
 								<div class="col-sm-6">
-									<input type="date" name="birthday" class="form-control" id="exampleInputDate1"
-										placeholder="年/月/日">
+									<input type="date" form="registForm" name="birthday" class="form-control"
+										id="exampleInputDate1" placeholder="年/月/日">
 								</div>
 							</div>
 							<div class="form-group">
@@ -141,13 +141,28 @@
 									<img alt="校验码无法显示" src="/JavaEE/img/captcha.jhtml">
 								</div>
 							</div>
+						</form>
+						<input type="text" form="registForm" id="headImgUrl" name="headImgUrl" value=""
+							hidden="hidden" />
+						<form action="/JavaEE/file?method=uploadFile" enctype="multipart/form-data" method="POST"
+							target="form_iframe" id="uploadHeadImg" class="form-horizontal">
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<input type="submit" value="注册"
-										style="background: url('/JavaEE/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
+								<label for="exampleInputDate1" class="col-sm-2 control-label">上传用户头像</label>
+								<div class="col-sm-6">
+									<input type="file" form="uploadHeadImg" name="headImg" accept="image/*"
+										class="form-control" id="headImg" placeholder="请选择图片格式的文件">
 								</div>
 							</div>
 						</form>
+						<!-- 此iframe作用：防止表单提交后做跳转 -->
+						<iframe id="form_iframe" name="form_iframe" style="display:none;"></iframe>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" form="registForm" value="注册"
+									style="background: url('/JavaEE/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
+							</div>
+						</div>
+
 					</div>
 					<div class="col-md-2"></div>
 				</div>
@@ -199,19 +214,44 @@
 		//校验确认密码和密码是否一致
 		Utils.on(document.getElementById("exampleInputPassword2"), "blur", function () {
 			const exampleInputPassword1Value = document.getElementById("exampleInputPassword1").value;
-			if (Utils.strIsBlank(this.value) && this.value != exampleInputPassword1Value) {
+			if (Utils.strIsBlank(this.value) || this.value != exampleInputPassword1Value) {
 				var node = document.createTextNode("请保持确认秘密与密码一致。");
 				showTip(this, node);
 			}
 		});
 
 		/**
-		* 表单异步校验
+		* 表单校验
 		*/
 		Utils.on(document.getElementById("registForm"), "submit", function (event) {
+			//校验确认密码和密码是否一致
+			const exampleInputPassword1Value = document.getElementById("exampleInputPassword1").value;
+			const exampleInputPassword2Value = document.getElementById("exampleInputPassword2").value;
+			if (exampleInputPassword2Value != exampleInputPassword1Value) {
+				//取消事件的默认动作 event.preventDefault();
+				event.returnValue = false;
+				const node = document.createTextNode("请保持确认秘密与密码一致。");
+				showTip(this, node);
+				return false;//结束事件处理函数
+			}
 
-			const formData = new FormData(document.getElementById("registForm"));
-			Utils.async("post", convert_FormData_to_json(formData),
+			//上传用户头像
+			if (!Utils.strIsBlank(document.getElementById("headImg").value)) {
+				Utils.async("post", new FormData(document.getElementById("uploadHeadImg")), "/JavaEE/file?method=uploadFile", function (data) {
+					if (200 != data.code) {
+						//取消事件的默认动作 event.preventDefault();
+						event.returnValue = false;
+						const node = document.createTextNode("头像上传失败，请重新上传图片并重新提交表单。");
+						showTip(document.getElementById("registForm"), node);
+						return false;//结束事件处理函数
+					} else {//文件上传成功
+						document.getElementById("headImgUrl").setAttribute("value", data.data);
+					}
+				}, false, 'json', false, false);
+			}
+
+			//插入用户信息
+			Utils.async("post", convert_FormData_to_json(new FormData(document.getElementById("registForm"))),
 				"/JavaEE/user?method=checkUserRegist", function (data) {
 					if (200 != data.code) {
 						//取消事件的默认动作 event.preventDefault();
@@ -223,10 +263,12 @@
 		});
 
 
+
+
 		function showTip(el, textNode) {
 			//创建元素
 			const newSubE = document.createElement("b");
-			newSubE.setAttribute("style","color: red;");
+			newSubE.setAttribute("style", "color: red;");
 			//添加子元素
 			newSubE.appendChild(textNode);
 

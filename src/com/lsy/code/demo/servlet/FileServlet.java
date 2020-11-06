@@ -61,7 +61,7 @@ public class FileServlet extends BaseServlet {
 	}
 
 	/**
-	 *  	上传文件到指定目录
+	 * 上传文件到指定目录
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -69,13 +69,13 @@ public class FileServlet extends BaseServlet {
 	 */
 	public void uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String path ="/home/smates";
 		// 生成工厂
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		// 设置缓存路径
 		diskFileItemFactory.setRepository(new File("F:/Demo/file/temp/"));
 		// 设置大小限制，即上传的文件大于多少的时候需要缓存
 		diskFileItemFactory.setSizeThreshold(1024 * 1024 * 3);
-		System.out.println(ServletFileUpload.isMultipartContent(request));
 		if (ServletFileUpload.isMultipartContent(request)) {// 检查表单enctype="multipart/form-data"
 			// 创建解析类
 			ServletFileUpload fileUpload = new ServletFileUpload(diskFileItemFactory);
@@ -90,10 +90,8 @@ public class FileServlet extends BaseServlet {
 						String fileName = fileItem.getName();
 						// 文件流
 						InputStream is = fileItem.getInputStream();
-						// 目录分离
-						String hexString = Integer.toHexString(fileName.hashCode());
-						String path = hexString.charAt(0) + "/" + hexString.charAt(1);
-						File destFile = new File("F:/Demo/file/upload_file/" + path);
+						path += request.getContextPath()+"/demo/upload_file";
+						File destFile = new File(path);
 						destFile.mkdirs();
 						File file = new File(destFile, fileName);
 						// 输出流
@@ -104,6 +102,10 @@ public class FileServlet extends BaseServlet {
 						is.close();
 						//删除FileItemd的主体内容，删除临时文件
 						fileItem.delete();
+
+						JSONObject jsonObject = JSONObject.fromObject(MessageHandler.createMsgSuccess("文件上传成功",path+"/"+fileName));
+						response.getWriter().print(jsonObject);
+						return;
 					}
 //        			else {
 //        				System.out.println(fileItem.getString());
@@ -118,13 +120,11 @@ public class FileServlet extends BaseServlet {
 			}
 		}else {
 			BaseMessage<?> message = MessageHandler.createMsgFailure("表单未正确设置enctype");
-			JSONObject jsonObject = JSONObject.fromObject(message);
-			response.getWriter().print(jsonObject);
+			JSONObject jonObject = JSONObject.fromObject(message);
+			response.getWriter().print(jonObject);
 			return;
 		}
-		BaseMessage<?> message = MessageHandler.createMsgSuccess("文件上传成功");
-		JSONObject jsonObject = JSONObject.fromObject(message);
-		response.getWriter().print(jsonObject);
+
 	}
 
 	public static String base64EncodeFileName(String fileName) {

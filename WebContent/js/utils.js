@@ -3,7 +3,7 @@ var Utils = {
 	 * 通用的事件添加方法
 	 * @param elm 元素
 	 * @param type 事件名
-	 * @param handler 回调函数
+	 * @param handler 事件处理函数
 	 * @returns {*}
 	 */
 	//

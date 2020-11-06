@@ -30,7 +30,7 @@ public class GenericEncodingFilter implements Filter {
 		response.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		logger.info("filter+装饰者模式，对请求中中文乱码进行处理。");
 		MyGenericEncoding myGenericEncoding = new MyGenericEncoding((HttpServletRequest) request);
-		 chain.doFilter(myGenericEncoding, response);
+		chain.doFilter(myGenericEncoding, response);
 	}
 
 	@Override

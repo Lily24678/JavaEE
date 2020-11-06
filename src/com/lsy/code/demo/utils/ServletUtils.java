@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ServletUtils {
+	/**
+	 *  创建cookie，并将cookie添加到项目里
+	 */
 	public static void addCookie(String name,String value,ServletRequest servletRequest,ServletResponse servletResponse) {
 		HttpServletRequest request=(HttpServletRequest)servletRequest;
 		HttpServletResponse response =(HttpServletResponse) servletResponse;
@@ -26,6 +29,9 @@ public class ServletUtils {
 		response.addCookie(cookie);;
 	}
 	
+	/**
+	 * 通过cookie名获取cookie
+	 */
 	public static Cookie getCookie(String name,ServletRequest servletRequest) {
 		HttpServletRequest request=(HttpServletRequest)servletRequest;
 		Cookie cookie2=null;

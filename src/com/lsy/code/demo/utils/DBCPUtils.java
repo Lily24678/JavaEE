@@ -30,9 +30,34 @@ public class DBCPUtils {
 		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
-		} catch (SQLException e) {
+			connection.setAutoCommit(false);
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return connection;
+	}
+
+	/**
+	 *
+	 * @param connection
+	 */
+	public static void close(Connection connection){
+		try {
+			connection.commit();
+		} catch (SQLException throwables) {
+			try {
+				connection.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			throwables.printStackTrace();
+		}finally {
+			try {
+				connection.close();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+		}
+
 	}
 }

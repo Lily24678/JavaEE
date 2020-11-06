@@ -29,7 +29,6 @@ public class StaticResourceFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		// 从 HTTP 头中取得 Referer 值
 		String referer = req.getHeader("Referer");
-		System.out.println(referer);
 		if (req.getRequestURL().toString().endsWith("JavaEE/")) {
 			chain.doFilter(request, response);
 		} else if (referer != null) {

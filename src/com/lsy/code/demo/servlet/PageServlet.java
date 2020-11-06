@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 public class PageServlet extends BaseServlet {
 
-    public String file() {
-        return "/demo/file.html";
-    }
-
-    /**
+      /**
      * 重定向到登陆页面
      */
     public void login(HttpServletRequest request, HttpServletResponse response) {

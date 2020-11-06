@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.lsy.code.demo.domain.HeadImg;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -33,34 +34,42 @@ public class UserServlet extends BaseServlet {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public void checkUserRegist(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		response.setContentType("text/html;charset=UTF-8");// 响应字符流乱码
+	public void checkUserRegist(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String headImgUrl = request.getParameter("headImgUrl");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("注册成功");
-		
 		Connection connection = DBCPUtils.getConnection();
-		String sql = "SELECT uid FROM user WHERE username=?";
 		QueryRunner q = new QueryRunner();
-		String qname = q.query(connection, sql, new ScalarHandler<String>(), username);
-		connection.close();
+
+		//查找用户登陆名
+		String qname = q.query(connection, "SELECT username FROM user WHERE username=?", new ScalarHandler<String>(), username);
 		if (StringUtils.isNotBlank(qname)) {
 			massage = MessageHandler.createMsgFailure("用户已经存在，不可重复注册");
 			response.getWriter().print(JSONObject.fromObject(massage));
 			return;
 		}
 		//新增一条记录到用户表中
-	    connection = DBCPUtils.getConnection();
-		q = new QueryRunner();
-		sql = "insert into user(uid,username,password) values(?,?,?)";
-		q.insert(connection,sql, new BeanHandler<User>(User.class),UUID.randomUUID().toString().replaceAll("-", ""), username,password);
-		connection.close();
+		String uid =  StringUtils.createStrByUUID();
+		int insertUser =  q.update(connection, "insert into user(uid,username,password) values(?,?,?)", uid, username, password);
+
+		if (StringUtils.isNotBlank(headImgUrl)){
+			//新增一条记录到头像表中
+			int insertHeadImg = q.update(connection, "insert into head_img(hid,uid,url) values(?,?,?)", StringUtils.createStrByUUID(), uid, headImgUrl);
+			if (0==insertHeadImg){//用户未成功绑定头像
+				connection.rollback();
+				massage = MessageHandler.createMsgFailure("头像上传失败，请重新上传图片并重新提交表单。");
+			}
+		}
+		DBCPUtils.close(connection);
+
 		//清空登录信息
 		Cookie cookie = ServletUtils.getCookie("username", request);
 		ServletUtils.removeCookie(cookie, request, response);
 		response.getWriter().print(JSONObject.fromObject(massage));
 	}
-	
+
+
 
 	/**
 	 * 登录校验
@@ -68,21 +77,21 @@ public class UserServlet extends BaseServlet {
 	 * @param request
 	 * @param response
 	 * @throws IOException
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public void checkUserLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
-
+		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
 		Connection connection = DBCPUtils.getConnection();
-		String sql = "SELECT * FROM user WHERE username=? and password=?";
 		QueryRunner q = new QueryRunner();
+
+		String sql = "SELECT * FROM user WHERE username=? and password=?";
 		User user = q.query(connection, sql, new BeanHandler<User>(User.class), username,password);
 		connection.close();
-		
-		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
+
 		if (null==user) {
 			massage = MessageHandler.createMsgFailure("用户名或者登录密码错误"); 
 		} else {
