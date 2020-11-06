@@ -39,10 +39,12 @@ public class FileServlet extends BaseServlet {
 		// 2. 设置Content-Disposition
 		// 根据浏览器的类型处理中文文件的乱码问题:
 		String agent = request.getHeader("User-Agent");
-		if (agent.contains("Firefox")) {
-			filename = base64EncodeFileName(filename);
-		} else {
-			filename = URLEncoder.encode(filename, "UTF-8");
+		if (null!=request.getCharacterEncoding()&&!"UTF-8".equals(request.getCharacterEncoding())){
+			if (agent.contains("Firefox")) {
+				filename = base64EncodeFileName(filename);
+			} else {
+				filename = URLEncoder.encode(filename, "UTF-8");
+			}
 		}
 		response.setHeader("Content-Disposition", "attachment;filename=" + filename);
 
@@ -69,7 +71,7 @@ public class FileServlet extends BaseServlet {
 	 */
 	public void uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String path ="/home/smates";
+		String path ="/home/smates/temp"+request.getContextPath();;
 		// 生成工厂
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		// 设置缓存路径
@@ -90,7 +92,6 @@ public class FileServlet extends BaseServlet {
 						String fileName = fileItem.getName();
 						// 文件流
 						InputStream is = fileItem.getInputStream();
-						path += request.getContextPath()+"/demo/upload_file";
 						File destFile = new File(path);
 						destFile.mkdirs();
 						File file = new File(destFile, fileName);
