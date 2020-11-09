@@ -29,8 +29,10 @@ public class GenericEncodingFilter implements Filter {
 		logger.info("过滤器GenericEncodingFilter功能---防止中文乱码");
 		response.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		logger.info("filter+装饰者模式，对请求中中文乱码进行处理。");
-		MyGenericEncoding myGenericEncoding = new MyGenericEncoding((HttpServletRequest) request);
-		chain.doFilter(myGenericEncoding, response);
+		//tomcat8.8.59不需要做中文乱码处理，tomcat7需要做中文乱码处理
+//		MyGenericEncoding myGenericEncoding = new MyGenericEncoding((HttpServletRequest) request);
+//		chain.doFilter(myGenericEncoding, response);
+		chain.doFilter(request,response);
 	}
 
 	@Override

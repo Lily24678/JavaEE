@@ -33,23 +33,24 @@ public class FileServlet extends BaseServlet {
 	public void downFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String filename = request.getParameter("filename");
+		String realPath = this.getServletContext().getRealPath("/file/" + filename);
+
 		// 1. 设置Content-Type头
 		response.setHeader("Content-Type", this.getServletContext().getMimeType(filename));
 
 		// 2. 设置Content-Disposition
 		// 根据浏览器的类型处理中文文件的乱码问题:
 		String agent = request.getHeader("User-Agent");
-		if (null!=request.getCharacterEncoding()&&!"UTF-8".equals(request.getCharacterEncoding())){
-			if (agent.contains("Firefox")) {
+
+		if (agent.contains("Firefox")) {
 				filename = base64EncodeFileName(filename);
 			} else {
 				filename = URLEncoder.encode(filename, "UTF-8");
 			}
-		}
+
 		response.setHeader("Content-Disposition", "attachment;filename=" + filename);
 
 		// 3、设置文件输入流
-		String realPath = this.getServletContext().getRealPath("/file/" + filename);
 		InputStream is = new FileInputStream(realPath);
 
 		// 4、向页面响应
