@@ -19,14 +19,11 @@ public class MyGenericEncoding extends HttpServletRequestWrapper {
     @Override
     public String getParameter(String name) {
         String method = request.getMethod();
-        if ("get".equalsIgnoreCase(method)) {
-            String value = null;
-            try {
-                value = new String(request.getParameter(name).getBytes("ISO-8859-1"), "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            return value;
+        if ("get".equalsIgnoreCase(method)) {//在get请求下tomcat8不需要做中文乱码处理，tomcat7需要做中文乱码处理
+//            String value = null;
+//             value = new String(request.getParameter(name).getBytes("ISO-8859-1"), "UTF-8");
+//             return value;
+            return request.getParameter(name);
         } else if ("post".equalsIgnoreCase(method)) {
             try {
                 request.setCharacterEncoding("UTF-8");

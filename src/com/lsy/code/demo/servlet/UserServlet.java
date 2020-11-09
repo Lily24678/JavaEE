@@ -52,14 +52,12 @@ public class UserServlet extends BaseServlet {
 		//新增一条记录到用户表中
 		String uid =  StringUtils.createStrByUUID();
 		int insertUser =  q.update(connection, "insert into user(uid,username,password) values(?,?,?)", uid, username, password);
+		//新增一条记录到头像表中
+		int insertHeadImg = q.update(connection, "insert into head_img(hid,uid,url) values(?,?,?)", StringUtils.createStrByUUID(), uid, headImgUrl);
 
-		if (StringUtils.isNotBlank(headImgUrl)){
-			//新增一条记录到头像表中
-			int insertHeadImg = q.update(connection, "insert into head_img(hid,uid,url) values(?,?,?)", StringUtils.createStrByUUID(), uid, headImgUrl);
-			if (0==insertHeadImg){//用户未成功绑定头像
-				connection.rollback();
-				massage = MessageHandler.createMsgFailure("头像上传失败，请重新上传图片并重新提交表单。");
-			}
+		if (0==insertHeadImg){//用户未成功绑定头像
+			connection.rollback();
+			massage = MessageHandler.createMsgFailure("头像上传失败，请重新上传图片并重新提交表单。");
 		}
 		DBCPUtils.close(connection);
 
@@ -88,6 +86,7 @@ public class UserServlet extends BaseServlet {
 		Connection connection = DBCPUtils.getConnection();
 		QueryRunner q = new QueryRunner();
 
+		//查找用户信息
 		String sql = "SELECT * FROM user WHERE username=? and password=?";
 		User user = q.query(connection, sql, new BeanHandler<User>(User.class), username,password);
 		connection.close();

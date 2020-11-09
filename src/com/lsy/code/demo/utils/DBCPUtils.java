@@ -30,7 +30,7 @@ public class DBCPUtils {
 		Connection connection = null;
 		try {
 			connection = dataSource.getConnection();
-			connection.setAutoCommit(false);
+			connection.setAutoCommit(false);//设置事物手动提交
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class DBCPUtils {
 	}
 
 	/**
-	 *
+	 * 手动提交并释放资源
 	 * @param connection
 	 */
 	public static void close(Connection connection){

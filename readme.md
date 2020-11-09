@@ -43,8 +43,8 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - ServletUtils(cookie)
 - utils.js(纯js代码：)
 1. 处理中文乱码（GenericEncodingFilter）
-> 1. 接收出现中文乱码的原因：tomcat服务器的默认编码与浏览器编码不一致
-> 2. tomcat8.8.59不需要做中文乱码处理，tomcat7需要做中文乱码处理.
+> 1. get请求下，接收出现中文乱码的原因：tomcat服务器对uri的处理编码与浏览器编码不一致
+> 2. 在get请求下，tomcat8.8.59不需要做中文乱码处理，tomcat7需要做中文乱码处理.
 > 3. 查看tomcat的url编码：在webapps/docs/config/http.html下有URIEncoding说明，根据此处说明可以更改Tomcat对URI的接收编码（Tomcat8.5.59在conf下catalina.properties追加org.apache.catalina.STRICT_SERVLET_COMPLIANCE=true）
 2. 实现自动登录（LoginFilter）
 3. 注册、登录，输入用户名和密码后（异步校验）。
