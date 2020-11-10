@@ -3,6 +3,7 @@ package com.lsy.code.demo.servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -91,16 +92,26 @@ public class UserServlet extends BaseServlet {
 		//查找用户信息
 		String sql = "SELECT * FROM user WHERE username=? and password=?";
 		User user = q.query(connection, sql, new BeanHandler<User>(User.class), username,password);
-		connection.close();
+		DBCPUtils.close(connection);
 
 		if (null==user) {
 			massage = MessageHandler.createMsgFailure("用户名或者登录密码错误"); 
-		} else {
-			ServletUtils.addCookie("username", username, request,response);
-			if (StringUtils.isNotBlank(persis))
-				ServletUtils.addCookie("username", username + "-" + password, request,response);
-			if (StringUtils.isNotBlank(autologin))
-				ServletUtils.addCookie("username", username + "-" + password + "-" + autologin, request,response);
+		} else {//用户登录完成后,显示您是第x位访问的用户,您的上次访问时间是:yyyy-MM-dd.
+			//登陆成功，用户数+1
+			Integer count = (Integer) request.getServletContext().getAttribute("count");
+			request.getServletContext().setAttribute("count",count);
+			System.out.println(username+"，已登陆，是第"+count+"位。");
+
+			Cookie lastVisit = ServletUtils.getCookie("lastVisit", request);
+			if (null==lastVisit){//是第一次登陆
+				request.getServletContext().setAttribute("count",count);
+			}else {//不是第一次登陆
+				ServletUtils.addCookie("showLastVisit", LocalDateTime.parse(lastVisit.getValue()).toString(),request,response);
+			}
+
+			ServletUtils.addCookie("username",username,request,response);
+			ServletUtils.addCookie("count",""+count,request,response);
+			ServletUtils.addCookie("lastVisit",LocalDateTime.now().toString(),request,response);
 		}
 		// 转换成JSON字符串
 		JSONObject jsonObject = JSONObject.fromObject(massage);

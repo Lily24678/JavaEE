@@ -24,8 +24,8 @@ public class BaseServlet extends HttpServlet{
 			Method method = clazz.getMethod(methodName,HttpServletRequest.class,HttpServletResponse.class);
 			String path = (String) method.invoke(this, request,response);
 			if(StringUtils.isNotBlank(path)) {
-				request.getRequestDispatcher(path).forward(request, response);//转发
-				//response.sendRedirect("/JavaEE/file.html");//重定向
+//				request.getRequestDispatcher(path).forward(request, response);//转发
+				response.sendRedirect(path);//重定向
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

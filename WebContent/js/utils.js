@@ -80,10 +80,10 @@ var Utils = {
 	 * @param exdays cookie存在多少天
 	 */
 	setCookie: function(cname, cvalue, exdays) {
-		var d = new Date();
+		const d = new Date();
 		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-		var expires = "expires=" + d.toGMTString();
-		document.cookie = cname + "=" + cvalue + "; " + expires;
+		const expires = "expires=" + d.toGMTString();
+		document.cookie = cname + "=" + cvalue + "; " + expires+";path=/";// path 参数告诉浏览器 cookie 的路径。默认情况下，cookie 属于当前页面
 	},
 
 	/**
@@ -92,8 +92,8 @@ var Utils = {
 	 * @returns {string}
 	 */
 	getCookie: function(cname) {
-		var name = cname + "=";
-		var ca = document.cookie.split(';');
+		const name = cname + "=";
+		const ca = document.cookie.split(';');
 		for (var i = 0; i < ca.length; i++) {
 			var c = ca[i].trim();
 			if (c.indexOf(name) == 0) {
@@ -108,7 +108,7 @@ var Utils = {
  * 创建异步对象
  */
 function createXHR() {
-	var xhr = null;
+	let xhr = null;
 	try { //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
 		xhr = new XMLHttpRequest();
 	} catch (e) {
@@ -124,7 +124,7 @@ function createXHR() {
 }
 
 function initXHR(xhr,params,processData,contentType,dataType){
-	var data=null;
+	let data = null;
 	if(typeof dataType!='undefined'){
 		dataType = dataType.toLowerCase()
 	}else {
@@ -149,10 +149,10 @@ function initXHR(xhr,params,processData,contentType,dataType){
 	return data;
 }
 
-var convert_FormData_to_json = function (formData) {
-    var objData = {};
-    for (var entry of formData.entries()){
-        objData[entry[0]] = entry[1];
-    }
-    return objData;
+const convert_FormData_to_json = function (formData) {
+	const objData = {};
+	for (var entry of formData.entries()) {
+		objData[entry[0]] = entry[1];
+	}
+	return objData;
 };
