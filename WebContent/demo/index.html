@@ -288,6 +288,23 @@
                 </div>
             </div>
         </div>
+        <!-- 历史浏览记录 -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        历史浏览记录<a href="/JavaEE/product?method=removeBrowsingHistory" style="font-size: small;">清空浏览记录</a><img alt="图片无法显示" src="/JavaEE/img/title2.jpg">
+                    </h2>
+                </div>
+            </div>
+            <div class="row" id="pidHistory">
+                <!--<div class="col-md-1" style="text-align: center; height: 100px;">
+                    <a href="/JavaEE/demo/product.html?small09"><img alt="图片无法显示"
+                        src="/JavaEE/img/products/small09.jpg"
+                        width="100%" height="130"></a>
+                </div>-->
+            </div>
+        </div>
     </div>
 
     <!-- 底部内容 -->
@@ -335,6 +352,24 @@
         document.getElementById("menuList").appendChild(liEle);
     }
 
+    /**
+     * 显示历史浏览记录
+     */
+    const pids = Utils.getCookie("pidHistory");
+    if(!Utils.strIsBlank(pids)){
+        let pidArr = pids.split("-");
+        let html='';
+        for(let i=0;i<pidArr.length;i++){
+            Utils.async("post",{pid:pidArr[i]},"/JavaEE/product?method=findById",function(data){
+                if(200==data.code){
+                    const product = data.data;
+                    html+='<div class="col-md-1" style="text-align: center; height: 100px;"><a href="/JavaEE/demo/product.html?'+product.pid+'"><img alt="图片无法显示" src="/JavaEE/img/products/'+product.imgurl+'"  width="100%" height="130"></a></div>';
+                }
+
+            },false,"json")
+        }
+        document.getElementById("pidHistory").innerHTML=html;
+    }
 
     /* 轮播图 */
     $('.carousel').carousel({

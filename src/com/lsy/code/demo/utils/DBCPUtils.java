@@ -24,6 +24,14 @@ public class DBCPUtils {
 	}
 
 	/**
+	 * 获取javax.sql.DataSource
+	 * @return
+	 */
+	public static DataSource getDataSource() {
+		return dataSource;
+	}
+
+	/**
 	 * @return 获取java.sql.Connection;
 	 */
 	public static Connection getConnection() {

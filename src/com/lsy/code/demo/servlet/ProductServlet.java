@@ -1,5 +1,6 @@
 package com.lsy.code.demo.servlet;
 
+import com.lsy.code.demo.dao.ProductDao;
 import com.lsy.code.demo.domain.Product;
 import com.lsy.code.demo.utils.DBCPUtils;
 import com.lsy.code.demo.utils.MessageHandler;
@@ -7,6 +8,7 @@ import com.lsy.code.demo.utils.ServletUtils;
 import com.lsy.code.servlet.BaseServlet;
 import com.sun.xml.internal.ws.resources.HandlerMessages;
 import net.sf.json.JSONObject;
+import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -30,10 +32,7 @@ public class ProductServlet extends BaseServlet {
      */
     public void addBrowsingHistory(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String pid = request.getParameter("pid");
-        Connection connection = DBCPUtils.getConnection();
-        QueryRunner q = new QueryRunner();
-        Product product = q.query(connection, "select * from product where pid=?", new BeanHandler<>(Product.class), pid);
-        DBCPUtils.close(connection);
+        Product product = new ProductDao().findById(pid);
         response.getWriter().print(JSONObject.fromObject(MessageHandler.createMsgSuccess("查询成功",product)).toString());
 
         //添加商品浏览记录
@@ -50,5 +49,25 @@ public class ProductServlet extends BaseServlet {
         }
     }
 
+    /**
+     * 清空商品浏览记录
+     * @param request
+     * @param response
+     */
+    public String removeBrowsingHistory(HttpServletRequest request,HttpServletResponse response){
+        ServletUtils.removeCookie(ServletUtils.getCookie("pidHistory",request),request,response);
+        return request.getContextPath();
+    }
+
+    /**
+     * 根据主键查找商品信息
+     * @param request
+     * @param response
+     */
+    public void findById(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException {
+        String pid = request.getParameter("pid");
+        Product product = new ProductDao().findById(pid);
+        response.getWriter().print(JSONObject.fromObject(MessageHandler.createMsgSuccess("查询成功",product)).toString());
+    }
 
 }
