@@ -1,29 +1,22 @@
 package com.lsy.code.demo.servlet;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.UUID;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.lsy.code.demo.dao.HeadImgDao;
+import com.lsy.code.demo.dao.UserDao;
 import com.lsy.code.demo.domain.HeadImg;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
-
 import com.lsy.code.demo.domain.User;
 import com.lsy.code.demo.utils.BaseMessage;
-import com.lsy.code.demo.utils.DBCPUtils;
 import com.lsy.code.demo.utils.MessageHandler;
 import com.lsy.code.demo.utils.ServletUtils;
 import com.lsy.code.demo.utils.StringUtils;
 import com.lsy.code.servlet.BaseServlet;
-
 import net.sf.json.JSONObject;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 /**用户 */
 @SuppressWarnings("serial")
 public class UserServlet extends BaseServlet {
@@ -40,11 +33,10 @@ public class UserServlet extends BaseServlet {
 		String password = request.getParameter("password");
 		String headImgUrl = request.getParameter("headImgUrl");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("注册成功");
-		Connection connection = DBCPUtils.getConnection();
-		QueryRunner q = new QueryRunner();
 
+		UserDao userDao =  new UserDao();
 		//查找用户登陆名
-		String qname = q.query(connection, "SELECT username FROM user WHERE username=?", new ScalarHandler<String>(), username);
+		String qname = userDao.findUsernameByUsername(username);
 		if (StringUtils.isNotBlank(qname)) {
 			massage = MessageHandler.createMsgFailure("用户已经存在，不可重复注册");
 			response.getWriter().print(JSONObject.fromObject(massage));
@@ -52,17 +44,11 @@ public class UserServlet extends BaseServlet {
 		}
 		//新增一条记录到用户表中
 		String uid =  StringUtils.createStrByUUID();
-		int insertUser =  q.update(connection, "insert into user(uid,username,password) values(?,?,?)", uid, username, password);
+		userDao.addUser(new User(uid,username,password));
 		if (StringUtils.isNotBlank(headImgUrl)){
 			//新增一条记录到头像表中
-			int insertHeadImg = q.update(connection, "insert into head_img(hid,uid,url) values(?,?,?)", StringUtils.createStrByUUID(), uid, headImgUrl);
-
-			if (0==insertHeadImg){//用户未成功绑定头像
-				connection.rollback();
-				massage = MessageHandler.createMsgFailure("头像上传失败，请重新上传图片并重新提交表单。");
-			}
+			int insertHeadImg = new HeadImgDao().addHeadImg(new HeadImg(StringUtils.createStrByUUID(), uid, headImgUrl));
 		}
-		DBCPUtils.close(connection);
 
 		//清空登录信息
 		Cookie cookie = ServletUtils.getCookie("username", request);
@@ -86,13 +72,9 @@ public class UserServlet extends BaseServlet {
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
-		Connection connection = DBCPUtils.getConnection();
-		QueryRunner q = new QueryRunner();
 
 		//查找用户信息
-		String sql = "SELECT * FROM user WHERE username=? and password=?";
-		User user = q.query(connection, sql, new BeanHandler<User>(User.class), username,password);
-		DBCPUtils.close(connection);
+		User user = new UserDao().findByUsernameAndPassword(username,password);
 
 		if (null==user) {
 			massage = MessageHandler.createMsgFailure("用户名或者登录密码错误"); 

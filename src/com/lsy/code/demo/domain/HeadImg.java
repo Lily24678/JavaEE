@@ -8,6 +8,15 @@ public class HeadImg{
     private  String uid;//关联的注册用户d
     private  String url;//头像的地址
 
+    public HeadImg(String hid, String uid, String url) {
+        this.hid = hid;
+        this.uid = uid;
+        this.url = url;
+    }
+
+    public HeadImg() {
+    }
+
     public String getHid() {
         return hid;
     }

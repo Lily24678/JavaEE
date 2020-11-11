@@ -20,6 +20,15 @@ public class User implements Serializable {
 	private Integer state;//状态：0注销用户，1正常用户 			
 	private Date birthday;//生日	
 
+	public User() {
+	}
+
+	public User(String uid, String username, String password) {
+		this.uid = uid;
+		this.username = username;
+		this.password = password;
+	}
+
 	public Integer getAreaCode() {
 		return areaCode;
 	}
