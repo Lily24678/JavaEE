@@ -31,5 +31,6 @@ public class HttpServlet1 extends HttpServlet {
 		Bean2 bean2 = new Bean2();
 		bean2.setName("bean2");
 		session.setAttribute("bean2", bean2);
+		session.invalidate();
 	}
 }

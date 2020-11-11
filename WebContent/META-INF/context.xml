@@ -2,10 +2,10 @@
 <Context>
 <!--
       maxIdleSwap :1          1分钟后session会自动序列化到硬盘。session的最大空闲时间
-      directory   :javaee    序列化后存放的位置.序列化的session的路径，在work目录下自己的项目中会有一个文件夹
+      directory   :/home/smates/JavaEE    序列化后存放的位置.序列化的session的路径，在work目录下自己的项目中会有一个文件夹
  -->
 <Manager className="org.apache.catalina.session.PersistentManager" maxIdleSwap="1">
-      <Store className="org.apache.catalina.session.FileStore" directory="javaee"/>
+      <Store className="org.apache.catalina.session.FileStore" directory="/home/smates/soft/tomcat/apache-tomcat-8.5.59/work/Catalina/localhost/JavaEE"/>
 </Manager>
 <!-- tomcat 内置连接池 配置-->
   <Resource name="tomcatpool"

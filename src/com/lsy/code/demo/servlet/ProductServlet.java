@@ -2,21 +2,16 @@ package com.lsy.code.demo.servlet;
 
 import com.lsy.code.demo.dao.ProductDao;
 import com.lsy.code.demo.domain.Product;
-import com.lsy.code.demo.utils.DBCPUtils;
 import com.lsy.code.demo.utils.MessageHandler;
 import com.lsy.code.demo.utils.ServletUtils;
 import com.lsy.code.servlet.BaseServlet;
-import com.sun.xml.internal.ws.resources.HandlerMessages;
 import net.sf.json.JSONObject;
-import org.apache.commons.dbutils.DbUtils;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -58,6 +53,43 @@ public class ProductServlet extends BaseServlet {
         ServletUtils.removeCookie(ServletUtils.getCookie("pidHistory",request),request,response);
         return request.getContextPath();
     }
+
+    /**
+     * 将商品添加到购物车
+     * javax.servlet.http.HttpSession;
+     * @param request
+     * @param response
+     */
+    public void shoppingCart(HttpServletRequest request,HttpServletResponse response){
+        String pid = request.getParameter("pid");
+        String count = request.getParameter("productCount");
+        HttpSession session = request.getSession();
+        Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");
+        
+        //未登陆状态
+        if (null==map_cart)//购物车没有任何东西
+            map_cart=new HashMap<>();
+        if (!map_cart.containsKey(pid)){//购物车中没有该商品信息
+            map_cart.put("pid",Integer.parseInt(count));
+        }else {//购物车有该商品信息
+            map_cart.put("pid",map_cart.get(pid)+Integer.parseInt(count));
+        }
+        session.setAttribute("shoppingCart",map_cart);
+
+        //登陆状态下，用户与商品信息关联
+    }
+
+    /**
+     * 显示购物车信息
+     * @param request
+     * @param response
+     */
+    public void showCart(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");       response.getWriter().print(JSONObject.fromObject(MessageHandler.createMsgSuccess("查询成功",map_cart)).toString());
+    }
+
+
 
     /**
      * 根据主键查找商品信息

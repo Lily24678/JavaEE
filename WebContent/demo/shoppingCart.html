@@ -8,7 +8,7 @@
     <script src="/JavaEE/bootstrap/jquery-1.11.3.min.js"></script>
     <script src="/JavaEE/bootstrap/bootstrap.min.js"></script>
     <script src="/JavaEE/js/utils.js"></script>
-    <title>商品详情</title>
+    <title>购物车</title>
 </head>
 
 <body>
@@ -67,24 +67,6 @@
                         <div class="row">
                             <div class="col-md-12"><span id="price">￥330.00</span></div>
                         </div>
-                        <form action="/JavaEE/product?method=shoppingCart" method="POST" target="form_iframe"
-                            class="form-horizontal">
-                            <div class="form-group">
-                                <label for="productCount" class="col-sm-1 control-label" style="text-align: left">商品数量</label>
-                                <div class="col-sm-2">
-                                    <input type="number" min="0" class="form-control" id="productCount"
-                                        name="productCount" value="0" placeholder="商品数量" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-2">
-                                    <input type="hidden" id="pid" name="pid" value=""/>
-                                    <button type="submit" class="btn btn-danger">加入购物车</button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- 此iframe作用：防止表单提交后做跳转 -->
-                        <iframe id="form_iframe" name="form_iframe" style="display:none;"></iframe>
                     </div>
                 </div>
                 <div class="row">
@@ -119,16 +101,21 @@
         </div>
     </div>
     <script>
-        Utils.async("post", { pid: window.location.search.substr(1) }, "/JavaEE/product?method=addBrowsingHistory", function (data) {
-            if (200 == data.code) {
-                const product = data.data;
-                document.getElementById("pimg").setAttribute("src", "/JavaEE/img/products/" + product.imgurl);
-                document.getElementById("pname").innerText = product.pname;
-                document.getElementById("price").innerText = "￥" + product.price;
-                document.getElementById("describe").innerText = product.describe;
-                document.getElementById("pid").setAttribute("value",product.pid);
+        /**
+         * 显示购物车信息 
+         */
+        Utls.async("get",{},"/JavaEE/product?method=showCart",function (data){
+            if (200==data){
+                console.log(data.data);
+                console.log(ypeof data.data);
+/*                Utils.async("get",{},"/JavaEE/product?method=showCart",function (data){
+                    if (200==data){
+
+                    }
+                },true,"json");*/
             }
-        }, false, "json");
+        },false,"json");
+         
     </script>
 </body>
 

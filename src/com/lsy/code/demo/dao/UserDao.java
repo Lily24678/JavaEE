@@ -11,25 +11,31 @@ import java.sql.SQLException;
 public class UserDao {
 
     /**
-     *
+     * 
+     * 通过登陆名查找登陆用户名
      * @param username
      * @return
      * @throws SQLException
      */
     public String findUsernameByUsername(String username) throws SQLException {
         QueryRunner q = new QueryRunner(DBCPUtils.getDataSource());
-        String qusrname = q.query("", new ScalarHandler<String>(), username);
+        String qusrname = q.query("SELECT username FROM  user WHERE username=?", new ScalarHandler<String>(), username);
         return qusrname;
     }
 
+    /**
+     * 通过登陆名和登陆密码查找用户信息
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public User findByUsernameAndPassword(String username,String password) throws SQLException {
         QueryRunner q = new QueryRunner(DBCPUtils.getDataSource());
         User user = q.query("SELECT * FROM user WHERE username=? and password=?", new BeanHandler<>(User.class), username, password);
         return user;
     }
-
-    /**
-     *
+    /* 新增用户信息
      * @param user
      * @return
      */
