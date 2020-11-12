@@ -4,6 +4,7 @@ import com.lsy.code.demo.dao.ProductDao;
 import com.lsy.code.demo.domain.Product;
 import com.lsy.code.demo.utils.MessageHandler;
 import com.lsy.code.demo.utils.ServletUtils;
+import com.lsy.code.demo.utils.StringUtils;
 import com.lsy.code.servlet.BaseServlet;
 import net.sf.json.JSONObject;
 
@@ -22,6 +23,7 @@ public class ProductServlet extends BaseServlet {
 
     /**
      * 添加商品浏览记录
+     * javax.servlet.http.Cookie;
      * @param request
      * @param response
      */
@@ -65,14 +67,14 @@ public class ProductServlet extends BaseServlet {
         String count = request.getParameter("productCount");
         HttpSession session = request.getSession();
         Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");
-        
+
         //未登陆状态
         if (null==map_cart)//购物车没有任何东西
             map_cart=new HashMap<>();
         if (!map_cart.containsKey(pid)){//购物车中没有该商品信息
-            map_cart.put("pid",Integer.parseInt(count));
+            map_cart.put(pid,Integer.parseInt(count));
         }else {//购物车有该商品信息
-            map_cart.put("pid",map_cart.get(pid)+Integer.parseInt(count));
+            map_cart.put(pid,map_cart.get(pid)+Integer.parseInt(count));
         }
         session.setAttribute("shoppingCart",map_cart);
 
@@ -86,7 +88,8 @@ public class ProductServlet extends BaseServlet {
      */
     public void showCart(HttpServletRequest request,HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");       response.getWriter().print(JSONObject.fromObject(MessageHandler.createMsgSuccess("查询成功",map_cart)).toString());
+        Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");
+        response.getWriter().print(JSONObject.fromObject(MessageHandler.createMsgSuccess("查询成功",map_cart)).toString());
     }
 
 

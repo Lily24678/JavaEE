@@ -4,6 +4,7 @@ import com.lsy.code.demo.domain.Product;
 import com.lsy.code.demo.utils.DBCPUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 
 import java.sql.SQLException;
 
@@ -19,5 +20,4 @@ public class ProductDao {
         Product product = q.query("select  * from product where pid=?",new BeanHandler<Product>(Product.class), pid);
         return product;
     }
-
 }
