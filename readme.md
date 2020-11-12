@@ -51,6 +51,7 @@ WEB中的监听器共有三类八种(监听三个域对象):
 4. 实现文件的下载与上传(commons-fileupload-xxx.jar,commons-io-xxx.jar)
 5. 实现浏览记录功能
 6. 实现购物车功能
+7. 实现图片验证码
 ```
 <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 <dependency>

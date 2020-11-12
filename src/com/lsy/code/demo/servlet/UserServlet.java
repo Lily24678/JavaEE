@@ -69,9 +69,15 @@ public class UserServlet extends BaseServlet {
 	public void checkUserLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String checkimg = request.getParameter("checkimg");
 		String autologin = request.getParameter("autologin");
 		String persis = request.getParameter("persis");
 		BaseMessage<?> massage = MessageHandler.createMsgSuccess("登录成功");
+
+		// 验证码校验
+		String code = (String) request.getSession().getAttribute("code");
+		if (StringUtils.isBlank(checkimg)||!code.equals(checkimg))
+			massage = MessageHandler.createMsgFailure("验证码输入错误，请重新输入");
 
 		//查找用户信息
 		User user = new UserDao().findByUsernameAndPassword(username,password);

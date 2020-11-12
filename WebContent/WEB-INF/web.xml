@@ -136,6 +136,14 @@
         <servlet-name>product</servlet-name>
         <url-pattern>/product</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>checkimg</servlet-name>
+        <servlet-class>com.lsy.code.demo.servlet.CheckImgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkimg</servlet-name>
+        <url-pattern>/checkimg</url-pattern>
+    </servlet-mapping>
     <!-- 解决中文乱码 -->
     <filter>
         <filter-name>GenericEncodingFilter</filter-name>
