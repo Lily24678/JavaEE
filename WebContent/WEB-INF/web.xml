@@ -4,7 +4,7 @@
          id="WebApp_ID" version="3.0">
     <display-name>JavaEE</display-name>
     <welcome-file-list>
-        <welcome-file>demo/index.html</welcome-file>
+        <welcome-file>/demo/index.html</welcome-file>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
@@ -12,7 +12,15 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
-
+    <!--设置全局的错误友好页面-->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/demo/error.html</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/demo/error.html</location>
+    </error-page>
     <!-- ServletContext配置:全局初始化参数：配置 -->
     <context-param>
         <param-name>username</param-name>
