@@ -4,7 +4,6 @@ import com.lsy.code.demo.dao.ProductDao;
 import com.lsy.code.demo.domain.Product;
 import com.lsy.code.demo.utils.MessageHandler;
 import com.lsy.code.demo.utils.ServletUtils;
-import com.lsy.code.demo.utils.StringUtils;
 import com.lsy.code.servlet.BaseServlet;
 import net.sf.json.JSONObject;
 
