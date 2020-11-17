@@ -10,19 +10,14 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>首页</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.min.css">
-    <script src="<%=request.getContextPath()%>/bootstrap/jquery-1.11.3.min.js"></script>
-    <script src="<%=request.getContextPath()%>/bootstrap/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/utils.js"></script>
+    <%@include file="head.jsp"%>
+    <title>JSP 连接数据库</title>
 </head>
 
 <body>
 <div class="container-fluid">
     <!-- 顶部内容 -->
-    <%@include file="head.jsp"%>
+    <%@include file="top.jsp"%>
     <!-- 主体内容 -->
     <div class="container-fluid">
         <!-- 轮播图 -->
@@ -242,73 +237,16 @@
                 </div>
             </div>
         </div>
-        <!-- 历史浏览记录 -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>
-                        历史浏览记录<a href="<%=request.getContextPath()%>/product?method=removeBrowsingHistory" style="font-size: small;">清空浏览记录</a><img alt="图片无法显示" src="<%=request.getContextPath()%>/img/title2.jpg">
-                    </h2>
-                </div>
-            </div>
-            <div class="row" id="pidHistory">
-                <!--<div class="col-md-1" style="text-align: center; height: 100px;">
-                    <a href="<%=request.getContextPath()%>/demo/product.html?small09"><img alt="图片无法显示"
-                        src="<%=request.getContextPath()%>/img/products/small09.jpg"
-                        width="100%" height="130"></a>
-                </div>-->
-            </div>
-        </div>
     </div>
 
     <!-- 底部内容 -->
     <%@include file="fot.jsp" %>
 </div>
 <script type="text/javascript">
-    /**
-     * 用户登陆显示处理
-     */
-    const username_cookie = Utils.getCookie("username");
-    if (!Utils.strIsBlank(username_cookie)) {//已登陆
-        const liEle = document.createElement("li");
-        const aEle = document.createElement("a");
-        aEle.setAttribute("href", "javascript:void(0);");
-        aEle.setAttribute("style", "color:green;");
-        let textNote = null;
-        if (Utils.strIsBlank(Utils.getCookie("showLastVisit"))) {
-            textNote = document.createTextNode(username_cookie + "，您是第" + Utils.getCookie("count") + "位访问的用户");
-        } else {
-            textNote = document.createTextNode(username_cookie + "，您是第" + Utils.getCookie("count") + "位访问的用户。上次访问的时间是" + Utils.getCookie("showLastVisit"));
-        }
-        aEle.appendChild(textNote);
-        liEle.appendChild(aEle);
-        document.getElementById("menuList").appendChild(liEle);
-    }
-
-    /**
-     * 显示历史浏览记录
-     */
-    const pids = Utils.getCookie("pidHistory");
-    if(!Utils.strIsBlank(pids)){
-        let pidArr = pids.split("-");
-        let html='';
-        for(let i=0;i<pidArr.length;i++){
-            Utils.async("post",{pid:pidArr[i]},"<%=request.getContextPath()%>/product?method=findById",function(data){
-                if(200==data.code){
-                    const product = data.data;
-                    html+='<div class="col-md-1" style="text-align: center; height: 100px;"><a href="<%=request.getContextPath()%>/demo/product.html?'+product.pid+'"><img alt="图片无法显示" src="<%=request.getContextPath()%>/img/products/'+product.imgurl+'"  width="100%" height="130"></a></div>';
-                }
-
-            },false,"json")
-        }
-        document.getElementById("pidHistory").innerHTML=html;
-    }
-
-    /* 轮播图 */
+     /* 轮播图 */
     $('.carousel').carousel({
         interval: 2000
     })
-
 </script>
 </body>
 

@@ -49,9 +49,6 @@ WEB中的监听器共有三类八种(监听三个域对象):
 2. 实现自动登录（LoginFilter）
 3. 注册、登录，输入用户名和密码后（异步校验）。
 4. 实现文件的下载与上传(commons-fileupload-xxx.jar,commons-io-xxx.jar)
-5. 实现浏览记录功能
-6. 实现购物车功能
-7. 实现图片验证码
 ```
 <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 <dependency>
@@ -60,9 +57,12 @@ WEB中的监听器共有三类八种(监听三个域对象):
     <version>1.4</version>
 </dependency>
 ```
-5. 实现登录校验
-6. 阻止通过Url直接访问服务器上的静态文件
-7. CSRF攻击与防御
+5. 实现浏览记录功能
+6. 实现购物车功能
+7. 实现图片验证码
+8. 阻止通过Url直接访问服务器上的静态文件
+9. 实现登录校验
+10. CSRF攻击与防御
 
 #JSP????? vs EL表达式？？？
 - <%@ page session="true"%>:知识点----session与cookie的关系(request.getSession)
