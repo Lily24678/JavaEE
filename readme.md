@@ -64,12 +64,9 @@ WEB中的监听器共有三类八种(监听三个域对象):
 9. 实现登录校验
 10. CSRF攻击与防御
 
-#JSP????? vs EL表达式？？？
-- <%@ page session="true"%>:知识点----session与cookie的关系(request.getSession)
-
-
-#待定
-- JSP?????vs EL表达式？？？
+# JSP
+1. JSP 的应用（WebContent/demo/jsp/）
+2. JSTL标签库与EL表达式的结合使用（WebContent/demo/jst_el/）
 
 # HTTP
 ## 请求头

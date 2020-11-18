@@ -4,7 +4,9 @@
          id="WebApp_ID" version="3.0">
     <display-name>JavaEE</display-name>
     <welcome-file-list>
-        <welcome-file>/demo/jsp/index.jsp</welcome-file>
+        <welcome-file>/demo/jstl_el/index_sql.jsp</welcome-file>
+<!--        <welcome-file>/demo/jstl_el/index.jsp</welcome-file>-->
+<!--        <welcome-file>/demo/jsp/index.jsp</welcome-file>-->
 <!--        <welcome-file>/demo/index.html</welcome-file>-->
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
@@ -22,13 +24,20 @@
         <error-code>500</error-code>
         <location>/demo/error.html</location>
     </error-page>-->
-    <!--全局禁用EL表达式-->
-    <!--<jsp-config>
-        <jsp-property-group>
+    <!--  JSP相关全局配置  -->
+    <jsp-config>
+        <taglib>
+            <!-- 自定义taglib的uri -->
+            <taglib-uri>myjstl</taglib-uri>
+            <!-- 配置本地taglib位置，默认情况下taglib的为文件位置是在/WEB-INF/tags下 -->
+            <taglib-location>/WEB-INF/tags/c.tld</taglib-location>
+        </taglib>
+        <!--全局禁用EL表达式-->
+        <!--<jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <el-ignored>true</el-ignored>
-        </jsp-property-group>
-    </jsp-config>-->
+        </jsp-property-group>-->
+    </jsp-config>
     <!-- ServletContext配置:全局初始化参数：配置 -->
     <context-param>
         <param-name>username</param-name>
