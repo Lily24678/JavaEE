@@ -4,7 +4,7 @@ create table user
         primary key,
     username  varchar(20)  null comment '用户登陆名',
     password  varchar(20)  null comment '用户登陆密码',
-    name      varchar(20)  null comment '用户真实姓名',
+    name      varchar(255) null,
     email     varchar(30)  null comment '注册邮箱',
     telephone varchar(20)  null comment '注册电话号码',
     birthday  date         null comment '生日日期',

@@ -1,11 +1,11 @@
-# JavaWEB三大核心组件
-## Servlet
+# 一、JavaWEB三大核心组件
+## 1. Servlet
 使用步骤：
 - 1、实现Servlet接口。
 - 2、将实现类配置到服务器中。web.xml
 > 通用servlet（BaseServlet）
 
-## Listener
+## 2. Listener
 >- 事件源：Servlet中的三个域对象,ServletContext,HttpSession,ServletRequest.
 >- 监听器：自定义类实现8个接口.
 >- 事件源和监听器的绑定：配置.
@@ -19,35 +19,32 @@ WEB中的监听器共有三类八种(监听三个域对象):
 - 1、实现监听器接口。
 - 2、将实现类配置到服务器中。web。xml【第三类不需要配置】
 
-## Filter
+## 3. Filter
 使用步骤：
 - 1、实现Filter接口。
 - 2、将实现类配置到服务器中。web.xml
 
-#  网络编程
+# 二、网络编程
 - TCP
 - UDP
 
 
-# JAVA 基础
+# 三、、JAVA 基础
 ## JAVA 的类
-- 1. Properties
-- 2. Class、ClassLoader
+- Properties
+- Class、ClassLoader
 
-# 网页布局
-- 1. 表格布局。例：layout_table.html
-- 2. div+css 布局。 例：layout_div+css.html
-- 3. 框架布局（frame，分frameset 和iframe）
 
-# Demo案例
+# 四、Demo案例
+## 1. 实现的功能
 - ServletUtils(cookie)
 - utils.js(纯js代码：)
 1. 处理中文乱码（GenericEncodingFilter）
 > 1. get请求下，接收出现中文乱码的原因：tomcat服务器对uri的处理编码与浏览器编码不一致
 > 2. 在get请求下，tomcat8.8.59不需要做中文乱码处理，tomcat7需要做中文乱码处理.
 > 3. 查看tomcat的url编码：在webapps/docs/config/http.html下有URIEncoding说明，根据此处说明可以更改Tomcat对URI的接收编码（Tomcat8.5.59在conf下catalina.properties追加org.apache.catalina.STRICT_SERVLET_COMPLIANCE=true）
-2. 实现自动登录（LoginFilter）
-3. 注册、登录，输入用户名和密码后（异步校验）。
+2. 实现自动登录(设置cookie有效期即可)
+3. 实现 注册、登录功能
 4. 实现文件的下载与上传(commons-fileupload-xxx.jar,commons-io-xxx.jar)
 ```
 <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
@@ -57,18 +54,22 @@ WEB中的监听器共有三类八种(监听三个域对象):
     <version>1.4</version>
 </dependency>
 ```
-5. 实现浏览记录功能
+5. 实现历史浏览功能
 6. 实现购物车功能
 7. 实现图片验证码
-8. 阻止通过Url直接访问服务器上的静态文件
-9. 实现登录校验
-10. CSRF攻击与防御
+8. 阻止通过Url直接访问服务器上的静态文件，防御 CSRF攻击
+9. 实现登录校验（LoginFilter）
 
-# JSP
+## 2. JSP
 1. JSP 的应用（WebContent/demo/jsp/）
 2. JSTL标签库与EL表达式的结合使用（WebContent/demo/jst_el/）
 
-# HTTP
+# 五、网页布局
+1. 表格布局。例：layout_table.html
+2. div+css 布局。 例：layout_div+css.html
+3. 框架布局（frame，分frameset 和iframe）
+
+# 六、HTTP
 ## 请求头
 ### Referer
 - 作用:

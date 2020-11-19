@@ -20,7 +20,7 @@
             <div class="col-md-3" style="padding-top: 20px">
                 <ol id="menuList" class="list-inline">
                     <li><a href="<%=request.getContextPath()%>/demo/jsp/regist.jsp">注册</a></li>
-                    <li><a href="<%=request.getContextPath()%>/demo//login.jsp">登录</a></li>
+                    <li><a href="<%=request.getContextPath()%>/demo/jsp/login.jsp">登录</a></li>
                     <li><a href="<%=request.getContextPath()%>/demo/jsp/shoppingCart.jsp">购物车</a></li>
                     <li><a href="#">我的订单</a></li>
                     <%

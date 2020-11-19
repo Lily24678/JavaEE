@@ -2,12 +2,10 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
-    <display-name>JavaEE</display-name>
     <welcome-file-list>
-        <welcome-file>/demo/jstl_el/index_sql.jsp</welcome-file>
-<!--        <welcome-file>/demo/jstl_el/index.jsp</welcome-file>-->
-<!--        <welcome-file>/demo/jsp/index.jsp</welcome-file>-->
-<!--        <welcome-file>/demo/index.html</welcome-file>-->
+        <!--<welcome-file>/demo/index.html</welcome-file>-->
+        <!--<welcome-file>/demo/jstl_el/index.jsp</welcome-file>-->
+        <welcome-file>/demo/jsp/index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
@@ -15,8 +13,9 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
+    <display-name>JavaEE</display-name>
     <!--设置全局的错误友好页面-->
-<!--    <error-page>
+    <!--<error-page>
         <error-code>400</error-code>
         <location>/demo/error.html</location>
     </error-page>
@@ -26,6 +25,7 @@
     </error-page>-->
     <!--  JSP相关全局配置  -->
     <jsp-config>
+
         <taglib>
             <!-- 自定义taglib的uri -->
             <taglib-uri>myjstl</taglib-uri>
@@ -33,10 +33,10 @@
             <taglib-location>/WEB-INF/tags/c.tld</taglib-location>
         </taglib>
         <!--全局禁用EL表达式-->
-        <!--<jsp-property-group>
+        <!-- <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <el-ignored>true</el-ignored>
-        </jsp-property-group>-->
+        </jsp-property-group> -->
     </jsp-config>
     <!-- ServletContext配置:全局初始化参数：配置 -->
     <context-param>
@@ -181,15 +181,15 @@
         <url-pattern>/product/*</url-pattern>
     </filter-mapping>
     <!-- 登陆校验 -->
-      <!--<filter>
-          <filter-name>LoginFilter</filter-name>
-          <filter-class>com.lsy.code.demo.filter.LoginFilter</filter-class>
-      </filter>
-      <filter-mapping>
-          <filter-name>LoginFilter</filter-name>
-          <url-pattern>/demo/*</url-pattern>
-          <url-pattern>/file/**</url-pattern>
-      </filter-mapping>-->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.lsy.code.demo.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/demo/settlement.html</url-pattern>
+        <url-pattern>/demo/jsp/settlement.jsp</url-pattern>
+    </filter-mapping>
     <!-- 阻止通过Url直接访问服务器上的静态文件 -->
     <filter>
         <filter-name>StaticResourceFilter</filter-name>

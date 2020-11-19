@@ -16,7 +16,7 @@
     <!-- 顶部内容 -->
     <%@include file="top.jsp"%>
     <!-- 主体内容 -->
-    <div class="container-fluid" style="background: url(<%=request.getContextPath()%>/img/loginbg.jpg); width: 96.8;">
+    <div class="container-fluid" style="background: url(<%=request.getContextPath()%>/img/loginbg.jpg); width: 96.8%;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7"></div>
@@ -71,7 +71,6 @@
     <!-- 底部内容 -->
     <%@include file="foot.jsp"%>
 </div>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/utils.js"></script>
 <script type="text/javascript">
     /**
      * 验输入内容是否为空
