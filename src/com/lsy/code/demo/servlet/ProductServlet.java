@@ -65,6 +65,11 @@ public class ProductServlet extends BaseServlet {
         String pid = request.getParameter("pid");
         String count = request.getParameter("productCount");
         HttpSession session = request.getSession();
+        if (session.isNew()){
+            System.out.println("session创建成功，session的id是："+session.getId());
+        }else {
+            System.out.println("服务器已经存在该session了，session的id是："+session.getId());
+        }
         Map<String,Integer> map_cart = (Map<String, Integer>) session.getAttribute("shoppingCart");
 
         //未登陆状态

@@ -36,7 +36,7 @@
                     <%} else {%>
                     <li><a href="javascript:void(0);"
                            style="color: green;">您是第<%=ServletUtils.getCookie("count", request).getValue()%>
-                        位访问的用户.上次访问的时间是<%=ServletUtils.getCookie("showLastVisit", request).getValue()%>
+                        位访问的用户.
                     </a></li>
                     <%
                             }

@@ -3,9 +3,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
     <welcome-file-list>
+        <welcome-file>/demo/disable_cookie/session.jsp</welcome-file>
         <!--<welcome-file>/demo/index.html</welcome-file>-->
         <!--<welcome-file>/demo/jstl_el/index.jsp</welcome-file>-->
-        <welcome-file>/demo/jsp/index.jsp</welcome-file>
+        <!--<welcome-file>/demo/jstl_el/index_sql.jsp</welcome-file>-->
+        <!--<welcome-file>/demo/jsp/index.jsp</welcome-file>-->
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
@@ -25,7 +27,6 @@
     </error-page>-->
     <!--  JSP相关全局配置  -->
     <jsp-config>
-
         <taglib>
             <!-- 自定义taglib的uri -->
             <taglib-uri>myjstl</taglib-uri>
@@ -128,6 +129,7 @@
         <url-pattern>/*</url-pattern><!-- 拦截的资源 -->
     </filter-mapping>
 
+
     <!-- demo的servlet配置、filter配置 -->
     <servlet>
         <servlet-name>user</servlet-name>
@@ -168,6 +170,15 @@
     <servlet-mapping>
         <servlet-name>checkimg</servlet-name>
         <url-pattern>/checkimg</url-pattern>
+    </servlet-mapping>
+    <!--用于测试的Servlet：session依赖cookie，如果浏览器禁用了cookie的解决办法-->
+    <servlet>
+        <servlet-name>session</servlet-name>
+        <servlet-class>com.lsy.code.demo.servlet.DisableCookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>session</servlet-name>
+        <url-pattern>/disableCookie</url-pattern>
     </servlet-mapping>
     <!-- 解决中文乱码 -->
     <filter>

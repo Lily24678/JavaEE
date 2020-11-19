@@ -57,12 +57,16 @@ WEB中的监听器共有三类八种(监听三个域对象):
 5. 实现历史浏览功能
 6. 实现购物车功能
 7. 实现图片验证码
-8. 阻止通过Url直接访问服务器上的静态文件，防御 CSRF攻击
+8. 阻止通过Url直接访问服务器上的静态文件，简单的防御CSRF攻击
 9. 实现登录校验（LoginFilter）
 
 ## 2. JSP
-1. JSP 的应用（WebContent/demo/jsp/）
-2. JSTL标签库与EL表达式的结合使用（WebContent/demo/jst_el/）
+1. JSP 的应用（/demo/jsp/）
+2. JSTL标签库与EL表达式的结合使用（/demo/jst_el/）
+
+## 3. session依赖cookie，如果浏览器禁用了cookie的解决办法
+（/demo/disable_cookie/）
+
 
 # 五、网页布局
 1. 表格布局。例：layout_table.html
