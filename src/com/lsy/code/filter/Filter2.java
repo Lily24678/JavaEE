@@ -11,7 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = {"/*"})public class Filter2 implements Filter {
+@WebFilter(urlPatterns = {"/servlet1","/servlet2"})
+public class Filter2 implements Filter {
 	private static Logger logger = Logger.getLogger("com.lsy.code.filter.Filter2");
 
 	@Override

@@ -7,7 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter(urlPatterns = {"/*"},initParams = {@WebInitParam(name = "username",value = "root")},dispatcherTypes = {DispatcherType.REQUEST})
+@WebFilter(urlPatterns = {"/servlet1","/servlet2"},initParams = {@WebInitParam(name = "username",value = "root")},dispatcherTypes = {DispatcherType.REQUEST})
 public class Filter1 implements Filter {
 	private static Logger logger = Logger.getLogger("com.lsy.code.filter.Filter1");
 

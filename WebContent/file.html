@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Servlet3.0注解开发-测试文件上传</title>
+</head>
+<body>
+<form action="/JavaEE/file" enctype="multipart/form-data" method="post" target="form_iframe">
+    请选择文件：<input type="file" name="uploadFile" value="" accept="image/*"/><br/>
+    <input type="text" name="ee"/>
+    <br/>
+    <input type="submit" value="点击，上传文件"/><br/>
+</form>
+<iframe name="form_iframe" style="display: none;"></iframe>
+</body>
+</html>
