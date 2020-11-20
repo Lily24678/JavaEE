@@ -1,17 +1,17 @@
 package com.lsy.code.servlet;
 
-import java.io.IOException;
+import com.lsy.code.listener.Bean1;
+import com.lsy.code.listener.Bean2;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-import com.lsy.code.listener.Bean1;
-import com.lsy.code.listener.Bean2;
-
-@SuppressWarnings("serial")
+@WebServlet(urlPatterns = {"/servlet2"})
 public class HttpServlet1 extends HttpServlet {
 
 	@Override

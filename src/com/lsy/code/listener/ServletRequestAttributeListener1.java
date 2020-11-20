@@ -2,8 +2,9 @@ package com.lsy.code.listener;
 
 import javax.servlet.ServletRequestAttributeEvent;
 import javax.servlet.ServletRequestAttributeListener;
+import javax.servlet.annotation.WebListener;
 import java.util.logging.Logger;
-
+@WebListener
 public class ServletRequestAttributeListener1 implements ServletRequestAttributeListener {
 	private static Logger logger = Logger.getLogger("com.lsy.code.listener.ServletRequestAttributeListener1");
 

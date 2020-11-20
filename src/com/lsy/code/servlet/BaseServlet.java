@@ -1,14 +1,14 @@
 package com.lsy.code.servlet;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
+import com.lsy.code.StringUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.Method;
 
-import com.lsy.code.demo.utils.StringUtils;
 
 /**
  * 通用的Servlet
@@ -23,7 +23,7 @@ public class BaseServlet extends HttpServlet{
 		try {
 			Method method = clazz.getMethod(methodName,HttpServletRequest.class,HttpServletResponse.class);
 			String path = (String) method.invoke(this, request,response);
-			if(StringUtils.isNotBlank(path)) {
+			if(StringUtil.isNotBlank(path)) {
 //				request.getRequestDispatcher(path).forward(request, response);//转发
 				response.sendRedirect(path);//重定向
 			}

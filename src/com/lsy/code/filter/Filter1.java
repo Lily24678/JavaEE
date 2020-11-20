@@ -3,13 +3,11 @@ package com.lsy.code.filter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 
+@WebFilter(urlPatterns = {"/*"},initParams = {@WebInitParam(name = "username",value = "root")},dispatcherTypes = {DispatcherType.REQUEST})
 public class Filter1 implements Filter {
 	private static Logger logger = Logger.getLogger("com.lsy.code.filter.Filter1");
 

@@ -9,8 +9,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 
-public class Filter2 implements Filter {
+@WebFilter(urlPatterns = {"/*"})public class Filter2 implements Filter {
 	private static Logger logger = Logger.getLogger("com.lsy.code.filter.Filter2");
 
 	@Override

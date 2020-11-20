@@ -1,14 +1,11 @@
 package com.lsy.code.servlet;
 
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
+@WebServlet(urlPatterns = {"/servlet1"},loadOnStartup = 1)
 public class Servlet1 implements Servlet{
 	private static Logger logger = Logger.getLogger("com.lsy.code.servlet.Servlet1");
 
@@ -24,6 +21,7 @@ public class Servlet1 implements Servlet{
 		res.setContentType("text/html;charset=UTF-8");//响应字符流乱码
 		//res.getWriter().write("<!DOCTYPE html><html><head><title>jsp</title></head><body>jsp</body></html>");//响应一个html页面
 		res.getWriter().write("你的请求已由运行在WEB服务器上的 小型 Java程序Servlet处理完成");
+
 	}
 	
 	@Override

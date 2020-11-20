@@ -2,8 +2,9 @@ package com.lsy.code.listener;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import java.util.logging.Logger;
-
+@WebListener
 public class ServletContextListener1 implements ServletContextListener {
 	private static Logger logger = Logger.getLogger("com.lsy.code.listener.ServletContextListener1");
 

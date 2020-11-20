@@ -4,6 +4,7 @@ import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletContextAttributeListener;
 import java.util.logging.Logger;
 
+//@WebListener
 public class ServletContextAttributeListener1 implements ServletContextAttributeListener {
 	private static Logger logger = Logger.getLogger("com.lsy.code.listener.ServletContextAttributeListener1");
 

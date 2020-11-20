@@ -1,9 +1,10 @@
 package com.lsy.code.listener;
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 import java.util.logging.Logger;
-
+@WebListener
 public class HttpSessionAttributeListener1 implements HttpSessionAttributeListener {
 	private static Logger logger = Logger.getLogger("com.lsy.code.listener.HttpSessionAttributeListener1");
 
