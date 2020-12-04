@@ -149,9 +149,9 @@ function initXHR(xhr,params,processData,contentType,dataType){
 	return data;
 }
 
-const convert_FormData_to_json = function (formData) {
+function convert_FormData_to_json(formData) {
 	const objData = {};
-	for (var entry of formData.entries()) {
+	for (const entry of formData.entries()) {
 		objData[entry[0]] = entry[1];
 	}
 	return objData;
