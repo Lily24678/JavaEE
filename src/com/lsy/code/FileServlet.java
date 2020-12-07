@@ -24,6 +24,7 @@ public class FileServlet extends HttpServlet {
         String header = part.getHeader("Content-Disposition");
         String fileName = header.substring(header.indexOf("filename=\"")+10,header.length()-1);
         String outDir = req.getServletContext().getRealPath("/upload");//文件上传到tomcat中的位置
+        // part.write(outDir+"/"+fileName);
         FileOutputStream os = new FileOutputStream(outDir+"/"+fileName);
         InputStream is = part.getInputStream();
         //读写字节流
