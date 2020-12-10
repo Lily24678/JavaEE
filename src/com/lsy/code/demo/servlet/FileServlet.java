@@ -47,7 +47,7 @@ public class FileServlet extends BaseServlet {
 			} else {
 				filename = URLEncoder.encode(filename, "UTF-8");
 			}
-
+		//下载文件到浏览器时，此句不可少，且必须放在文件读写的前面。响应的内容处理方式-附件形式
 		response.setHeader("Content-Disposition", "attachment;filename=" + filename);
 
 		// 3、设置文件输入流
