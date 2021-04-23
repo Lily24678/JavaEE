@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="bguserDao" class="com.lsy.code.dao.BguserDao" />
+	<bean id="userDao" class="com.lsy.code.dao.UserDao" />
+	<bean id="categoryDao" class="com.lsy.code.dao.CategoryDao" />
+	<bean id="orderDao" class="com.lsy.code.dao.OrderDao" />
+	<bean id="productDao" class="com.lsy.code.dao.ProductDao" />
+</beans>
